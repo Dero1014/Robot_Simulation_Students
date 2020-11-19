@@ -1,13 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SpawnSensors : MonoBehaviour
 {
     public GameObject proxy;
     public GameObject laser;
-
-    public GameObject panel;
 
     private Transform clone;
 
@@ -47,10 +43,4 @@ public class SpawnSensors : MonoBehaviour
         clone.name = "PROXY" + numP.ToString();
         numP++;
     }
-
-    public void ToggleSensors()
-    {
-        panel.SetActive(!panel.activeSelf);
-    }
-
 }

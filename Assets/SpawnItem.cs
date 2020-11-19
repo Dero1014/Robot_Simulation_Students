@@ -1,13 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SpawnItem : MonoBehaviour
 {
     public GameObject item;
     public GameObject treadMill;
-    [Space(10)]
-    public GameObject itemPanel;
 
     private Transform clone;
 
@@ -45,10 +41,5 @@ public class SpawnItem : MonoBehaviour
         clone = Instantiate(treadMill, mPos, Quaternion.identity).transform;
         clone.name = "TreadMill " + numTread.ToString();
         numTread++;
-    }
-
-    public void ToggleItems()
-    {
-        itemPanel.SetActive(!itemPanel.activeSelf);
     }
 }

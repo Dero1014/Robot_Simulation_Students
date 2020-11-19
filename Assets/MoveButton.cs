@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class ToolToggles : MonoBehaviour
+public class MoveButton : MonoBehaviour
 {
     public InputField console;
 
