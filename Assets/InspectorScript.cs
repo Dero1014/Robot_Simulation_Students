@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class InspectorScript : MonoBehaviour
 {
@@ -286,15 +284,9 @@ public class InspectorScript : MonoBehaviour
         }
     }
 
-    public void SimulationToggle()
+    public void SimulationToggle(bool isOn)
     {
         if (roboIns)
-        {
-            foreach (GameObject part in interest.GetComponent<RobotManager>().sim)
-            {
-                part.SetActive(!part.activeSelf);
-            }
-        }
+            interest.GetComponent<RobotManager>().ShowSim = !isOn;
     }
-
 }

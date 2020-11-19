@@ -508,15 +508,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rank: 0
-  sim:
-  - {fileID: 7902642289204403122}
-  - {fileID: 7902642289912816337}
-  - {fileID: 7902642289410370908}
-  - {fileID: 7902642288195857656}
-  - {fileID: 7902642289511715756}
-  - {fileID: 7902642288231919460}
-  - {fileID: 7902642289668477062}
-  - {fileID: 7902642288084721165}
+  parts:
+  - normalPart: {fileID: 7902642289723343829}
+    simPart: {fileID: 7902642289204403122}
+  - normalPart: {fileID: 7902642288288236083}
+    simPart: {fileID: 7902642289912816337}
+  - normalPart: {fileID: 7902642289597521869}
+    simPart: {fileID: 7902642289410370908}
+  - normalPart: {fileID: 7902642288546228073}
+    simPart: {fileID: 7902642288195857656}
+  - normalPart: {fileID: 7902642290103075041}
+    simPart: {fileID: 7902642289511715756}
+  - normalPart: {fileID: 7902642288639441594}
+    simPart: {fileID: 7902642288231919460}
+  - normalPart: {fileID: 7902642288658627944}
+    simPart: {fileID: 7902642289668477062}
+  - normalPart: {fileID: 7902642289931563846}
+    simPart: {fileID: 7902642288084721165}
+  toleranceForHidingSim: 0.01
 --- !u!114 &3428307606577911926
 MonoBehaviour:
   m_ObjectHideFlags: 0
