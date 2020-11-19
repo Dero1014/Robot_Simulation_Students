@@ -121,19 +121,16 @@ public class CameraControls : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray,out hit))
-        {
-            if (hit.transform.tag != "Move Tool")
-                target = hit.transform;
+        if (Physics.Raycast(ray, out hit) && hit.transform.tag != "Move Tool")
+            target = hit.transform;
 
-        }
+        if (target == null)
+            return;
 
-        while (target.parent!=null) //checks the ultimate parent
+        while (target.parent != null) // gets the ultimate parent
         {
             if (target.parent != null)
                 target = target.parent;
         }
-
     }
-
 }

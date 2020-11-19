@@ -1,59 +1,42 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class ToolToggles : MonoBehaviour
 {
     public InputField console;
 
-    [Space(10)]
-    public ScreenButton inspector;
-    public ScreenButton spawn;
-    public ScreenButton moveTool;
-
-    private ScreenButton[] buttons;
+    public string moveKey;
+    public Button moveButton;
+    public GameObject moveObject;
 
     private void Start()
     {
-        buttons = new[] { inspector, spawn, moveTool };
-        foreach (ScreenButton button in buttons)
-            button.Init();
+        UpdateButton();
+        moveButton.onClick.AddListener(ToggleActive);
     }
 
     private void Update()
     {
         if (!console.isFocused)
         {
-            foreach (ScreenButton button in buttons)
-            {
-                if (Input.GetKeyDown(button.key))
-                    button.ToggleActive();
-            }
+            if (Input.GetKeyDown(moveKey))
+                ToggleActive();
         }
     }
 
-
-    [Serializable]
-    public class ScreenButton
+    public void Init()
     {
-        public string key;
-        public Button button;
-        public GameObject obj;
+        UpdateButton();
+        moveButton.onClick.AddListener(ToggleActive);
+    }
 
-        public void Init()
-        {
-            UpdateButton();
-            button.onClick.AddListener(ToggleActive);
-        }
-
-        public void ToggleActive()
-        {
-            obj.SetActive(!obj.activeSelf);
-            UpdateButton();
-        }
-        private void UpdateButton()
-        {
-            button.image.color = obj.activeSelf ? Color.gray : Color.white;
-        }
+    public void ToggleActive()
+    {
+        moveObject.SetActive(!moveObject.activeSelf);
+        UpdateButton();
+    }
+    private void UpdateButton()
+    {
+        moveButton.image.color = moveObject.activeSelf ? Color.gray : Color.white;
     }
 }
