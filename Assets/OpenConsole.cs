@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 //need to change how we use move script still have to think about it
 public class OpenConsole : MonoBehaviour
 {
-    public GameObject console; //should find a way to make a console for a spawned robot and assign the console to the robot
+    public RobotConsole console;
     public RobotCommands rcc;
     public Transform handTrans;
 
@@ -33,21 +31,21 @@ public class OpenConsole : MonoBehaviour
                     consoleActive = !consoleActive;
 
                     //if the console is active and we are switching between robots reset it so it updates
-                    if (console.GetComponent<RobotConsole>().conRobName.text != gameObject.name && !consoleActive)
+                    if (console.conRobName.text != gameObject.name && !consoleActive)
                         consoleActive = !consoleActive;
 
-                    console.SetActive(consoleActive); //activate it
-                    console.GetComponent<RobotConsole>().SaveText();
-                    console.GetComponent<RobotConsole>().conRobName.text = gameObject.name; //set its name
-                    console.GetComponent<RobotConsole>().rCom = gameObject.GetComponent<RobotCommands>(); //give it the robot command center 
-                    console.GetComponent<RobotConsole>().robotRank = gameObject.GetComponent<RobotManager>().rank; //give it the rank of the robot to access the code
-                    console.GetComponent<RobotConsole>().ShowText(); //show the code of the robot1
+                    console.gameObject.SetActive(consoleActive); //activate it
+                    console.SaveText();
+                    console.conRobName.text = gameObject.name; //set its name
+                    console.rCom = gameObject.GetComponent<RobotCommands>(); //give it the robot command center 
+                    console.robotRank = gameObject.GetComponent<RobotManager>().rank; //give it the rank of the robot to access the code
+                    console.ShowText(); //show the code of the robot1
                     //rcc.enabled = consoleActive;
                 }
             }
         }
 
-        if (!console.activeSelf && handTrans.gameObject.activeSelf) //if the console isn't active then set the target for the robot to the hand (THIS WORKS BUT ONLY WHEN THE HAND TRANS IS ACTIVE)
+        if (!console.gameObject.activeSelf && handTrans.gameObject.activeSelf) //if the console isn't active then set the target for the robot to the hand (THIS WORKS BUT ONLY WHEN THE HAND TRANS IS ACTIVE)
             rk.target = handTrans;
         
     }

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SpawnRobot : MonoBehaviour
 {
@@ -56,7 +54,7 @@ public class SpawnRobot : MonoBehaviour
         opC.handTrans = cloneHandTool.transform;
 
         //assign its console
-        opC.console = robotConsole.gameObject;
+        opC.console = robotConsole;
         robotConsole.AddNewCodeSection();
 
         //stup the max distance

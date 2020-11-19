@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CameraControls : MonoBehaviour
 {
@@ -84,12 +82,8 @@ public class CameraControls : MonoBehaviour
     void CameraZoom()
     {
         float scrollWheel = Input.GetAxisRaw("Mouse ScrollWheel");
-        float zoom = scrollWheel * zoomSensitivity * Time.deltaTime; 
-
-        Camera.main.fieldOfView -= zoom;
-
-        Camera.main.fieldOfView = Mathf.Clamp(Camera.main.fieldOfView, minZoom, maxZoom);
-
+        float zoom = scrollWheel * zoomSensitivity * Time.deltaTime;
+        transform.position += transform.forward * zoom;
     }
 
     void CameraMove()
