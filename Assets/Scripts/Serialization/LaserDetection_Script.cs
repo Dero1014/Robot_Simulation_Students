@@ -1,9 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class LaserDetection_Script : MonoBehaviour
+public class LaserDetection_Script : SerializableObject
 {
+    public override SerializableType SerializableType => SerializableType.Laser;
+
     public LayerMask IgnoreMe;
 
     private Transform[] muzzle;

@@ -1,9 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Treadmill_Script : MonoBehaviour
+public class Treadmill_Script : SerializableObject
 {
+    public override SerializableType SerializableType => SerializableType.Treadmill;
+
     public Transform treadmill;
     public Transform[] legs;
 

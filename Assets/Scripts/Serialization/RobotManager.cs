@@ -1,8 +1,10 @@
 ﻿using System;
 using UnityEngine;
 
-public class RobotManager : MonoBehaviour
+public class RobotManager : SerializableObject
 {
+    public override SerializableType SerializableType => SerializableType.Robot;
+
     public int rank = 0;
 
     public bool ShowSim { get; set; }

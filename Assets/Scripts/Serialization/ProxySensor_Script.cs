@@ -1,9 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class ProxySensor_Script : MonoBehaviour
+public class ProxySensor_Script : SerializableObject
 {
+    public override SerializableType SerializableType => SerializableType.Proxy;
+
     public bool state = false;
     [Header("Sensor Settings")]
     public float distanceDetection;
