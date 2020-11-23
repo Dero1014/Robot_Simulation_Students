@@ -213,7 +213,7 @@ public class RobotKinematicsTypeB : MonoBehaviour
             }
             
 
-            //set graphicly set hand to hold
+            //set graphicly hand to hold
             rGrip.localPosition = new Vector3(0.05f, rGrip.localPosition.y, rGrip.localPosition.z);
             lGrip.localPosition = new Vector3(-0.05f, lGrip.localPosition.y, lGrip.localPosition.z);
 
@@ -236,7 +236,7 @@ public class RobotKinematicsTypeB : MonoBehaviour
             targetGrab.parent = null;
         }
 
-        //set graphicly set hand to hold
+        //set graphicly hand to hold
         rGrip.localPosition = new Vector3(0.12f, rGrip.localPosition.y, rGrip.localPosition.z);
         lGrip.localPosition = new Vector3(-0.12f, lGrip.localPosition.y, lGrip.localPosition.z);
 

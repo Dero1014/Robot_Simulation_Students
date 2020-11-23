@@ -7,7 +7,6 @@ public class CameraControls : MonoBehaviour
 
     [Header("Zoom settings")]
     public float zoomSensitivity=0; //Koliko će brzo zumirat u odnosu na micanja kotača na mišu
-    [Tooltip("For forward movemnt of ctrl + scroll")]public float moveSpeed = 0; //brzina micanja kamere naprijed/nazad
     
     [Space(10)]
     public float minZoom = 0; //minimalni zoom
@@ -45,14 +44,8 @@ public class CameraControls : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.LeftAlt))
             CameraFocus();
 
-        if (Input.GetKey(KeyCode.LeftControl))
-        {
-            CameraMove();
-        }
-        else
-        {
-            CameraZoom();
-        }
+        //prima input ond kotačića miša i tamo miće kameru
+        CameraZoom();
 
     }
 
@@ -84,15 +77,6 @@ public class CameraControls : MonoBehaviour
         float scrollWheel = Input.GetAxisRaw("Mouse ScrollWheel");
         float zoom = scrollWheel * zoomSensitivity * Time.deltaTime;
         transform.position += transform.forward * zoom;
-    }
-
-    void CameraMove()
-    {
-
-        float move = Input.GetAxisRaw("Mouse ScrollWheel") * moveSpeed *Time.deltaTime;
-
-        transform.position += (transform.forward * move);
-
     }
 
     void CameraPan()
