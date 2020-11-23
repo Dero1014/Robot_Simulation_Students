@@ -10,7 +10,7 @@ public class TypeBEditor : Editor
     {
         RobotKinematicsTypeB rk = (RobotKinematicsTypeB)target;
         Handles.color = Color.red;
-        Handles.DrawSphere(0, rk.hand.position, Quaternion.identity, rk.range);
+        Handles.SphereHandleCap(0, rk.hand.position, Quaternion.identity, rk.range,EventType.Repaint);
     }
 
     public override void OnInspectorGUI()

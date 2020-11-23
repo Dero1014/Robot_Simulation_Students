@@ -10,7 +10,7 @@ public class InspectorScript : MonoBehaviour
     public GameObject treadInspector;
 
     [Space(20)]
-    public TextMeshProUGUI name;
+    public new TextMeshProUGUI name;
     public GameObject interest;
 
     public TMP_InputField[] pos;
