@@ -92,6 +92,7 @@ public class CameraControls : MonoBehaviour
     private Transform target; //last clicked on target
     void CameraFocus() //focusing on the object
     {
+        //watch out
         if (target!=null)
         {
             Vector3 focusPosition = target.position;
