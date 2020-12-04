@@ -90,13 +90,22 @@ public class CameraControls : MonoBehaviour
     }
 
     private Transform target; //last clicked on target
+    private GameObject gm;
+    public Transform me;
+    
     void CameraFocus() //focusing on the object
     {
         //watch out
         if (target!=null)
         {
             Vector3 focusPosition = target.position;
-            focusPosition += (-transform.forward * focusDistance);
+            print("These are positions " + focusPosition + "  " + transform.position);
+            Vector3 direction = -(focusPosition - transform.position);
+            print("This is direction " + direction);
+
+            float x = transform.localScale.x;
+
+            focusPosition += ((direction).normalized * focusDistance); 
             transform.position = focusPosition;
         }
     }
@@ -115,7 +124,13 @@ public class CameraControls : MonoBehaviour
         while (target.parent != null) // gets the ultimate parent
         {
             if (target.parent != null)
+            {
                 target = target.parent;
+                print(target);
+
+            }
         }
     }
+
+
 }
