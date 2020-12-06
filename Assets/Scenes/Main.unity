@@ -491,7 +491,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 823096136}
+      - m_Target: {fileID: 0}
         m_MethodName: Resume
         m_Mode: 1
         m_Arguments:
@@ -620,7 +620,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 823096136}
+      - m_Target: {fileID: 0}
         m_MethodName: BackToPause
         m_Mode: 1
         m_Arguments:
@@ -1088,7 +1088,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 823096131}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c80423e1f306424588ff25b239aaa2a, type: 3}
+  m_Script: {fileID: 11500000, guid: 23f3b0f5b2645844dbc0012aeeab5054, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   PauseButton: {fileID: 25743432}
@@ -1176,7 +1176,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 823096136}
+      - m_Target: {fileID: 0}
         m_MethodName: LoadMenu
         m_Mode: 1
         m_Arguments:
@@ -1460,7 +1460,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 823096136}
+      - m_Target: {fileID: 0}
         m_MethodName: LoadOptionsMenu
         m_Mode: 1
         m_Arguments:
