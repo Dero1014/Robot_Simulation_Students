@@ -15,8 +15,9 @@ public class CameraControls : MonoBehaviour
     [Header("Pan settings")]
     public float panSpeed = 0; //brzina micanja miša
 
-    //[Header("Camera settings")]
-    //[Tooltip("The distance the camera will be on focus")] public float focusDistance = 0;
+    
+    [Header("Camera settings")]
+    [Tooltip("The distance the camera will be on focus")] public float focusDistance = 0; // Preporučena vrijednost za fokus je 2
 
     float rotX = 0;
     float rotY = 0;
@@ -98,9 +99,9 @@ public class CameraControls : MonoBehaviour
         if (target != null)
         {
             Vector3 focusPosition = target.position;
-            print("These are positions " + focusPosition + "  " + transform.position);
+            //print("These are positions " + focusPosition + "  " + transform.position);
             Vector3 direction = -(focusPosition - transform.position);
-            print("This is direction " + direction);
+            //print("This is direction " + direction);
 
             float x = target.localScale.x;
             float y = target.localScale.y;
@@ -128,7 +129,7 @@ public class CameraControls : MonoBehaviour
                     max = z;
                 }
             }
-            float focusDistance =  (x +  y + z)/ 3;
+            // float focusDistance =  (x +  y + z)/ 3;
             focusPosition += ((direction).normalized * focusDistance * max); 
             transform.position = focusPosition;
         }
