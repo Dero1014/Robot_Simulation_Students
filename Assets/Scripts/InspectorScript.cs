@@ -4,19 +4,23 @@ using UnityEngine.UI;
 
 public class InspectorScript : MonoBehaviour
 {
+    //za aktiviranje inspektor komponenata
     public GameObject itemsInspector;
     public GameObject proxyInspector;
     public GameObject robotInspector;
     public GameObject treadInspector;
 
     [Space(20)]
-    public new TextMeshProUGUI name;
-    public GameObject interest;
+    public new TextMeshProUGUI name; //prikazuje ime objekta
+    private GameObject interest; // pamti izabrani objekt
 
+    // prikazuju vrijednosti objekta
     public TMP_InputField[] pos;
     public TMP_InputField[] scal;
     public TMP_InputField[] rot;
-    [Space(10)]
+    //
+
+    [Space(10)]// ignore
     public TMP_InputField proxyDistanceDetection;
     public TMP_InputField treadSpeed;
     public TMP_InputField mass;
@@ -25,13 +29,14 @@ public class InspectorScript : MonoBehaviour
     public Toggle simToggle;
 
     private Rigidbody rb;
+    //ignore end
 
     private bool itemIns = false;
     private bool proxIns = false;
     private bool laseIns = false;
     private bool roboIns = false;
-    private bool treaIns = false;
-    private bool physicsToggle = true;
+    private bool treadIns = false;
+    private bool physicsToggle = true; //ignore
 
     Vector3 rotatio = Vector3.zero;
 
@@ -58,7 +63,7 @@ public class InspectorScript : MonoBehaviour
                     name.text = interest.name;
                     rb = interest.GetComponent<Rigidbody>();
                     phyToggle.isOn = rb.useGravity;
-                    treaIns = false;
+                    treadIns = false;
                     laseIns = false;
                     proxIns = false;
                     itemIns = true;
@@ -69,7 +74,7 @@ public class InspectorScript : MonoBehaviour
                 {
                     interest = hitIns.transform.gameObject;
                     name.text = interest.name;
-                    treaIns = false;
+                    treadIns = false;
                     laseIns = false;
                     proxIns = true;
                     itemIns = false;
@@ -80,7 +85,7 @@ public class InspectorScript : MonoBehaviour
                 {
                     interest = hitIns.transform.gameObject;
                     name.text = interest.name;
-                    treaIns = false;
+                    treadIns = false;
                     laseIns = true;
                     proxIns = false;
                     itemIns = false;
@@ -95,7 +100,7 @@ public class InspectorScript : MonoBehaviour
                         interest = interest.transform.parent.gameObject;
                     }
                     name.text = interest.name;
-                    treaIns = true;
+                    treadIns = true;
                     laseIns = false;
                     proxIns = false;
                     itemIns = false;
@@ -107,7 +112,7 @@ public class InspectorScript : MonoBehaviour
                     interest = hitIns.transform.GetComponentInParent<RobotKinematicsTypeB>().gameObject;
                     name.text = interest.name;
                     //simToggle.isOn = interest.GetComponent<RobotManager>().sim[0].activeSelf;
-                    treaIns = false;
+                    treadIns = false;
                     laseIns = false;
                     proxIns = false;
                     itemIns = false;
@@ -124,7 +129,7 @@ public class InspectorScript : MonoBehaviour
         if (interest!=null && itemIns)
         {
             SetComponents();
-
+            
             //positions
             if (!pos[0].isFocused)
                 pos[0].text = interest.transform.position.x.ToString();
@@ -146,14 +151,14 @@ public class InspectorScript : MonoBehaviour
                 scal[2].text = interest.transform.localScale.z.ToString();
 
             //rotation
-            //if (!rot[0].isFocused)
-            //    rot[0].text = interest.transform.localEulerAngles.x.ToString();
+            if (!rot[0].isFocused)
+                rot[0].text = interest.transform.rotation.x.ToString();
 
-            //if (!rot[1].isFocused)
-            //    rot[1].text = interest.transform.localEulerAngles.y.ToString();
+            if (!rot[1].isFocused)
+                rot[1].text = interest.transform.eulerAngles.y.ToString();
 
-            //if (!rot[2].isFocused)
-            //    rot[2].text = interest.transform.localEulerAngles.z.ToString();
+            if (!rot[2].isFocused)
+                rot[2].text = interest.transform.localEulerAngles.z.ToString();
 
             interest.transform.position = new Vector3(float.Parse(pos[0].text), float.Parse(pos[1].text), float.Parse(pos[2].text));
             interest.transform.localScale = new Vector3(float.Parse(scal[0].text), float.Parse(scal[1].text), float.Parse(scal[2].text));
@@ -168,7 +173,6 @@ public class InspectorScript : MonoBehaviour
             if (float.TryParse(mass.text, out i))
             {
                 rb.mass = float.Parse(mass.text);
-
             }
 
         }
@@ -192,10 +196,12 @@ public class InspectorScript : MonoBehaviour
 
             interest.transform.position = new Vector3(float.Parse(pos[0].text), float.Parse(pos[1].text), float.Parse(pos[2].text));
             interest.transform.rotation = Quaternion.Euler(float.Parse(rot[0].text), float.Parse(rot[1].text), float.Parse(rot[2].text));
+
+            //component
             interest.transform.GetComponent<ProxySensor_Script>().distanceDetection = float.Parse(proxyDistanceDetection.text);
         }
 
-        if (interest != null && treaIns)
+        if (interest != null && treadIns)
         {
             SetComponents();
 
@@ -225,6 +231,8 @@ public class InspectorScript : MonoBehaviour
             interest.transform.position = new Vector3(float.Parse(pos[0].text), float.Parse(pos[1].text), float.Parse(pos[2].text));
             interest.transform.rotation = Quaternion.Euler(float.Parse(rot[0].text), float.Parse(rot[1].text), float.Parse(rot[2].text));
             interest.transform.localScale = new Vector3(float.Parse(scal[0].text), float.Parse(scal[1].text), float.Parse(scal[2].text));
+            
+            //component
             interest.transform.GetComponent<Treadmill_Script>().treadSpeed = float.Parse(treadSpeed.text);
         }
 
@@ -270,7 +278,7 @@ public class InspectorScript : MonoBehaviour
         itemsInspector.SetActive(itemIns);
         proxyInspector.SetActive(proxIns);
         robotInspector.SetActive(roboIns);
-        treadInspector.SetActive(treaIns);
+        treadInspector.SetActive(treadIns);
     }
 
     public void PhysicsToggle()
