@@ -60,15 +60,6 @@ public class CameraControls : MonoBehaviour
 
         rotX -= xR;
         rotY += yR;
-        
-        //for better look at the rotation 
-        //if (Mathf.Abs(rotX)>360)
-        //{
-        //    if (Mathf.Sign(rotX)==1)
-        //        rotX -= 360;
-        //    else
-        //        rotX += 360;
-        //}
 
         transform.localEulerAngles = new Vector3(rotX, rotY, 0);
     }
@@ -110,24 +101,16 @@ public class CameraControls : MonoBehaviour
             if (x > y)
             {
                 if (x > z)
-                {
                     max = x;
-                }
                 else
-                {
                     max = z;
-                }
             }
             else
             {
                 if (y > z)
-                {
                     max = y;
-                }
                 else
-                {
                     max = z;
-                }
             }
             // float focusDistance =  (x +  y + z)/ 3;
             focusPosition += ((direction).normalized * focusDistance * max); 
@@ -135,6 +118,8 @@ public class CameraControls : MonoBehaviour
             transform.LookAt(target);
             //ili
             //transform.rotation = Quaternion.LookRotation((direction).normalized, Vector3.up);
+            rotX = transform.localEulerAngles.x;
+            rotY = transform.localEulerAngles.y;
         }
     }
 
