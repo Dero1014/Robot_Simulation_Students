@@ -132,6 +132,9 @@ public class CameraControls : MonoBehaviour
             // float focusDistance =  (x +  y + z)/ 3;
             focusPosition += ((direction).normalized * focusDistance * max); 
             transform.position = focusPosition;
+            transform.LookAt(target);
+            //ili
+            //transform.rotation = Quaternion.LookRotation((direction).normalized, Vector3.up);
         }
     }
 
