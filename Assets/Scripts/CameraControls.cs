@@ -110,24 +110,17 @@ public class CameraControls : MonoBehaviour
             if (x > y)
             {
                 if (x > z)
-                {
                     max = x;
-                }
                 else
-                {
                     max = z;
-                }
+
             }
             else
             {
                 if (y > z)
-                {
                     max = y;
-                }
                 else
-                {
                     max = z;
-                }
             }
             // float focusDistance =  (x +  y + z)/ 3;
             focusPosition += ((direction).normalized * focusDistance * max); 
@@ -135,17 +128,21 @@ public class CameraControls : MonoBehaviour
             transform.LookAt(target);
             //ili
             //transform.rotation = Quaternion.LookRotation((direction).normalized, Vector3.up);
+            rotX = transform.localEulerAngles.x;
+            rotY = transform.localEulerAngles.y;
         }
     }
-
+    private GameObject ground;
     void CheckObject() //for having an object to focus on
     {
+        ground = GameObject.Find("Ground");
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit) && hit.transform.tag != "Move Tool")
             target = hit.transform;
-
+        if (target.transform == ground.transform)
+               target = null;
         if (target == null)
             return;
 
