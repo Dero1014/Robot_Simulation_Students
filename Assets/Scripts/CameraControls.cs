@@ -122,15 +122,17 @@ public class CameraControls : MonoBehaviour
             rotY = transform.localEulerAngles.y;
         }
     }
-
+    private GameObject ground;
     void CheckObject() //for having an object to focus on
     {
+        ground = GameObject.Find("Ground");
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit) && hit.transform.tag != "Move Tool")
             target = hit.transform;
-
+        if (target.transform == ground.transform)
+               target = null;
         if (target == null)
             return;
 
