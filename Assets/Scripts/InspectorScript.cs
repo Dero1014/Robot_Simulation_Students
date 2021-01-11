@@ -63,33 +63,21 @@ public class InspectorScript : MonoBehaviour
                     name.text = interest.name;
                     rb = interest.GetComponent<Rigidbody>();
                     phyToggle.isOn = rb.useGravity;
-                    treadIns = false;
-                    laseIns = false;
-                    proxIns = false;
-                    itemIns = true;
-                    roboIns = false;
+                    SetBooleans(false, false, false, true, false);
                 }
 
                 if (hitIns.transform.gameObject.tag == "Proxy")
                 {
                     interest = hitIns.transform.gameObject;
                     name.text = interest.name;
-                    treadIns = false;
-                    laseIns = false;
-                    proxIns = true;
-                    itemIns = false;
-                    roboIns = false;
+                    SetBooleans(false, false, true, false, false);
                 }
 
                 if (hitIns.transform.gameObject.tag == "Laser")
                 {
                     interest = hitIns.transform.gameObject;
                     name.text = interest.name;
-                    treadIns = false;
-                    laseIns = true;
-                    proxIns = false;
-                    itemIns = false;
-                    roboIns = false;
+                    SetBooleans(false, true, false, false, false);
                 }
 
                 if (hitIns.transform.gameObject.tag == "TreadMill")
@@ -100,23 +88,15 @@ public class InspectorScript : MonoBehaviour
                         interest = interest.transform.parent.gameObject;
                     }
                     name.text = interest.name;
-                    treadIns = true;
-                    laseIns = false;
-                    proxIns = false;
-                    itemIns = false;
-                    roboIns = false;
+                    SetBooleans(true, false, false, false, false);
                 }
-
+                
                 if (hitIns.transform.gameObject.layer == 9)
                 {
                     interest = hitIns.transform.GetComponentInParent<RobotKinematicsTypeB>().gameObject;
                     name.text = interest.name;
                     //simToggle.isOn = interest.GetComponent<RobotManager>().sim[0].activeSelf;
-                    treadIns = false;
-                    laseIns = false;
-                    proxIns = false;
-                    itemIns = false;
-                    roboIns = true;
+                    SetBooleans(false, false, false, false, true);
                 }
 
             }
@@ -152,13 +132,13 @@ public class InspectorScript : MonoBehaviour
 
             //rotation
             if (!rot[0].isFocused)
-                rot[0].text = interest.transform.rotation.x.ToString();
+                rot[0].text = interest.transform.eulerAngles.x.ToString();
 
             if (!rot[1].isFocused)
                 rot[1].text = interest.transform.eulerAngles.y.ToString();
 
             if (!rot[2].isFocused)
-                rot[2].text = interest.transform.localEulerAngles.z.ToString();
+                rot[2].text = interest.transform.eulerAngles.z.ToString();
 
             interest.transform.position = new Vector3(float.Parse(pos[0].text), float.Parse(pos[1].text), float.Parse(pos[2].text));
             interest.transform.localScale = new Vector3(float.Parse(scal[0].text), float.Parse(scal[1].text), float.Parse(scal[2].text));
@@ -236,7 +216,6 @@ public class InspectorScript : MonoBehaviour
             interest.transform.GetComponent<Treadmill_Script>().treadSpeed = float.Parse(treadSpeed.text);
         }
 
-
         if (interest != null && laseIns)
         {
             SetComponents();
@@ -271,6 +250,15 @@ public class InspectorScript : MonoBehaviour
         }
 
 
+    }
+
+    void SetBooleans(bool tread, bool laser, bool proximity, bool item, bool robot)
+    {
+        treadIns = tread;
+        laseIns = laser;
+        proxIns = proximity;
+        itemIns = item;
+        roboIns = robot;
     }
 
     void SetComponents()
