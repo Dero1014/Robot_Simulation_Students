@@ -21,6 +21,19 @@ public class MoveTool_Script : MonoBehaviour
     bool yAxis = false;
     bool zAxis = false;
     bool distanceChecked = false;
+    //Patrik
+    [Header("The XYZ Planes:")]
+    public GameObject x_Plane;
+    public GameObject y_Plane;
+    public GameObject z_Plane;
+
+    private void Start() //Patrik
+    {
+        x_Plane.SetActive(false);
+        y_Plane.SetActive(false);
+        z_Plane.SetActive(false);
+
+    }
 
     void Update()
     {
@@ -122,6 +135,10 @@ public class MoveTool_Script : MonoBehaviour
             //move on X axis
             if (xAxis)
             {
+                x_Plane.SetActive(true); // -
+                y_Plane.SetActive(false);// - - > Patrik
+                z_Plane.SetActive(false);// -
+
                 Vector3 mousePosition = GetMousePositionX(); //get the mouse position
 
                 if (!distanceChecked) //set the difference between the mouse and the origin point
@@ -135,6 +152,10 @@ public class MoveTool_Script : MonoBehaviour
 
             if (yAxis)
             {
+                x_Plane.SetActive(false);// -
+                y_Plane.SetActive(true); // - - > Patrik
+                z_Plane.SetActive(false);// -
+
                 Vector3 mousePosition = GetMousePositionY(); //get the mouse position
 
                 if (!distanceChecked) //set the difference between the mouse and the origin point
@@ -148,6 +169,10 @@ public class MoveTool_Script : MonoBehaviour
 
             if (zAxis)
             {
+                x_Plane.SetActive(false);// -
+                y_Plane.SetActive(false);// - - > Patrik
+                z_Plane.SetActive(true); // -
+
                 Vector3 mousePosition = GetMousePositionZ(); //get the mouse position
 
                 if (!distanceChecked) //set the difference between the mouse and the origin point
