@@ -26,7 +26,6 @@ public class LoseFocusOnAxis : MonoBehaviour
 
         _angleX = Vector3.Angle(xAxis.right, _CM);
 
-
         if (_angleX > 90)
         {
             _angleX = 180 - _angleX;

@@ -40,7 +40,7 @@ public class CameraControls : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.Mouse2))
             CameraPan();
-        else if(Input.GetKeyDown(KeyCode.Mouse0))
+        else if (Input.GetKeyDown(KeyCode.Mouse0))
             CheckObject();
         else if (Input.GetKeyDown(KeyCode.F))
             CameraFocus();
