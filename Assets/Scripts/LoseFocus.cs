@@ -5,15 +5,13 @@ using UnityEngine;
 public class LoseFocus : MonoBehaviour
 {     // by Patrik
     public float MaxAngle;
-
-    [SerializeField]
+    [Header("The Axis:")]
     public Transform xAxis;
     public Transform yAxis;
     public Transform zAxis;
-
+    [Space]
     public Transform Cam;
-
-    [SerializeField]
+    [Header("Angle Changes:")] 
     public float _angleX;
     public float _angleY;
     public float _angleZ;
