@@ -109,7 +109,48 @@ public class InspectorScript : MonoBehaviour
         if (interest!=null && itemIns)
         {
             SetComponents();
+<<<<<<< Updated upstream
             Set();
+=======
+
+            float IntX = interest.transform.position.x.ToString();
+          
+
+            //positions
+            if (!pos[0].isFocused)
+                pos[0].text = IntX;
+
+            if (!pos[1].isFocused)
+                pos[1].text = interest.transform.position.y.ToString();
+
+            if (!pos[2].isFocused)
+                pos[2].text = interest.transform.position.z.ToString();
+
+            //scale
+            if (!scal[0].isFocused)
+                scal[0].text = interest.transform.localScale.x.ToString();
+
+            if (!scal[1].isFocused)
+                scal[1].text = interest.transform.localScale.y.ToString();
+
+            if (!scal[2].isFocused)
+                scal[2].text = interest.transform.localScale.z.ToString();
+
+            //rotation
+            if (!rot[0].isFocused)
+                rot[0].text = interest.transform.rotation.x.ToString();
+
+            if (!rot[1].isFocused)
+                rot[1].text = interest.transform.eulerAngles.y.ToString();
+
+            if (!rot[2].isFocused)
+                rot[2].text = interest.transform.localEulerAngles.z.ToString();
+
+            interest.transform.position = new Vector3(float.Parse(pos[0].text), float.Parse(pos[1].text), float.Parse(pos[2].text));
+            interest.transform.localScale = new Vector3(float.Parse(scal[0].text), float.Parse(scal[1].text), float.Parse(scal[2].text));
+            interest.transform.rotation = Quaternion.Euler(float.Parse(rot[0].text), float.Parse(rot[1].text), float.Parse(rot[2].text));
+
+>>>>>>> Stashed changes
             //component
             if (!mass.isFocused)
                 mass.text = rb.mass.ToString();
