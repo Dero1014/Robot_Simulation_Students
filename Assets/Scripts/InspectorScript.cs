@@ -137,13 +137,9 @@ public class InspectorScript : MonoBehaviour
                 scal[2].text = interest.transform.localScale.z.ToString();
 
             //rotation
-            if (!rot[0].isFocused)
+            if (!rot[0].isFocused) and (!rot[1].isFocused) and (!rot[2].isFocused)
                 rot[0].text = interest.transform.rotation.x.ToString();
-
-            if (!rot[1].isFocused)
                 rot[1].text = interest.transform.eulerAngles.y.ToString();
-
-            if (!rot[2].isFocused)
                 rot[2].text = interest.transform.localEulerAngles.z.ToString();
 
             interest.transform.position = new Vector3(float.Parse(pos[0].text), float.Parse(pos[1].text), float.Parse(pos[2].text));
