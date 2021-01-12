@@ -109,44 +109,14 @@ public class InspectorScript : MonoBehaviour
         if (interest!=null && itemIns)
         {
             SetComponents();
-<<<<<<< Updated upstream
-            Set();
-=======
 
-            float IntX = interest.transform.position.x.ToString();
+            Set();
+
+
+         
           
 
-            //positions
-            if (!pos[0].isFocused)
-                pos[0].text = IntX;
 
-            if (!pos[1].isFocused)
-                pos[1].text = interest.transform.position.y.ToString();
-
-            if (!pos[2].isFocused)
-                pos[2].text = interest.transform.position.z.ToString();
-
-            //scale
-            if (!scal[0].isFocused)
-                scal[0].text = interest.transform.localScale.x.ToString();
-
-            if (!scal[1].isFocused)
-                scal[1].text = interest.transform.localScale.y.ToString();
-
-            if (!scal[2].isFocused)
-                scal[2].text = interest.transform.localScale.z.ToString();
-
-            //rotation
-            if (!rot[0].isFocused) and (!rot[1].isFocused) and (!rot[2].isFocused)
-                rot[0].text = interest.transform.rotation.x.ToString();
-                rot[1].text = interest.transform.eulerAngles.y.ToString();
-                rot[2].text = interest.transform.localEulerAngles.z.ToString();
-
-            interest.transform.position = new Vector3(float.Parse(pos[0].text), float.Parse(pos[1].text), float.Parse(pos[2].text));
-            interest.transform.localScale = new Vector3(float.Parse(scal[0].text), float.Parse(scal[1].text), float.Parse(scal[2].text));
-            interest.transform.rotation = Quaternion.Euler(float.Parse(rot[0].text), float.Parse(rot[1].text), float.Parse(rot[2].text));
-
->>>>>>> Stashed changes
             //component
             if (!mass.isFocused)
                 mass.text = rb.mass.ToString();
@@ -193,12 +163,28 @@ public class InspectorScript : MonoBehaviour
     }
     void Set()
     {
-        pos[0].text = interest.transform.position.x.ToString();
-        pos[1].text = interest.transform.position.y.ToString();
-        pos[2].text = interest.transform.position.z.ToString();
-        scal[0].text = interest.transform.localScale.x.ToString();
-        scal[1].text = interest.transform.localScale.y.ToString();
-        scal[2].text = interest.transform.localScale.z.ToString();
+
+        if (!pos[0].isFocused && !pos[1].isFocused && !pos[2].isFocused)
+        {
+            pos[0].text = (Mathf.Round((interest.transform.position.x) * 100) / 100).ToString();
+            pos[1].text = (Mathf.Round((interest.transform.position.y) * 100) / 100).ToString();
+            pos[2].text = (Mathf.Round((interest.transform.position.z) * 100) / 100).ToString();
+        }
+
+            if (!scal[0].isFocused && !scal[1].isFocused && !scal[2].isFocused)
+        {
+            scal[0].text = (Mathf.Round((interest.transform.localScale.x) * 100) / 100).ToString();
+            scal[1].text = (Mathf.Round((interest.transform.localScale.y) * 100) / 100).ToString();
+            scal[2].text = (Mathf.Round((interest.transform.localScale.z) * 100) / 100).ToString();
+        }
+
+        if (!rot[0].isFocused && !rot[1].isFocused && !rot[2].isFocused)
+        {
+            rot[0].text = (Mathf.Round((interest.transform.eulerAngles.x) * 100) / 100).ToString();
+            rot[1].text = (Mathf.Round((interest.transform.eulerAngles.y) * 100) / 100).ToString();
+            rot[2].text = (Mathf.Round((interest.transform.eulerAngles.z) * 100) / 100).ToString();
+        }
+
         interest.transform.position = new Vector3(float.Parse(pos[0].text), float.Parse(pos[1].text), float.Parse(pos[2].text));
         interest.transform.localScale = new Vector3(float.Parse(scal[0].text), float.Parse(scal[1].text), float.Parse(scal[2].text));
         interest.transform.rotation = Quaternion.Euler(float.Parse(rot[0].text), float.Parse(rot[1].text), float.Parse(rot[2].text));
