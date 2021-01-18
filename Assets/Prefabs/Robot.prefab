@@ -406,6 +406,7 @@ GameObject:
   - component: {fileID: 7902642288169495453}
   - component: {fileID: 448744076}
   - component: {fileID: 3428307606577911926}
+  - component: {fileID: 8867582623864041286}
   m_Layer: 9
   m_Name: Robot
   m_TagString: Robot
@@ -541,6 +542,18 @@ MonoBehaviour:
   handTool: {fileID: 0}
   maxDistance: 0
   minDistance: 0
+--- !u!114 &8867582623864041286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7902642288169495441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c374d25dbc4b5e4488b16c76f2fd3d9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7902642288195857656
 GameObject:
   m_ObjectHideFlags: 0

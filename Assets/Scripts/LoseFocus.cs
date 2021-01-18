@@ -18,6 +18,11 @@ public class LoseFocus : MonoBehaviour
 
     private Vector3 _CM;
 
+    private void Start()
+    {
+        Cam = Camera.main.transform;
+    }
+
     private void LateUpdate()
     {
         #region X-os
@@ -25,17 +30,11 @@ public class LoseFocus : MonoBehaviour
         _angleX = Vector3.Angle(xAxis.right, _CM);
 
         if (_angleX > 90)
-        {
             _angleX = 180 - _angleX;
-        }
         if (_angleX < MaxAngle)
-        {
             xAxis.gameObject.SetActive(false);
-        }
         else
-        {
             xAxis.gameObject.SetActive(true);
-        }
         #endregion
 
         #region Y-os
@@ -43,17 +42,11 @@ public class LoseFocus : MonoBehaviour
         _angleY = Vector3.Angle(yAxis.up, _CM);
 
         if (_angleY > 90)
-        {
             _angleY = 180 - _angleY;
-        }
         if (_angleY < MaxAngle)
-        {
             yAxis.gameObject.SetActive(false);
-        }
         else
-        {
             yAxis.gameObject.SetActive(true);
-        }
         #endregion
 
         #region Z-os
@@ -62,17 +55,11 @@ public class LoseFocus : MonoBehaviour
         _angleZ = Vector3.Angle(zAxis.forward, _CM);
 
         if (_angleZ > 90)
-        {
             _angleZ = 180 - _angleZ;
-        }
         if (_angleZ < MaxAngle)
-        {
             zAxis.gameObject.SetActive(false);
-        }
         else
-        {
             zAxis.gameObject.SetActive(true);
-        }
         #endregion
 
     }

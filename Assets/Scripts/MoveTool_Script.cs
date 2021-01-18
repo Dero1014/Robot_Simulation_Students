@@ -29,9 +29,13 @@ public class MoveTool_Script : MonoBehaviour
 
     private void Start() //Patrik
     {
-        x_Plane.SetActive(false);
-        y_Plane.SetActive(false);
-        z_Plane.SetActive(false);
+
+        if (x_Plane != null && y_Plane != null && z_Plane != null)
+        {
+            x_Plane.SetActive(false);
+            y_Plane.SetActive(false);
+            z_Plane.SetActive(false);
+        }
 
     }
 
@@ -190,23 +194,48 @@ public class MoveTool_Script : MonoBehaviour
     #region mousePosition
 
     Vector3 pos;
+    [Space(10)]
+    int MaxAngle = 45;
+    float _zAngle = 0;
+
+    Vector3 _camAngle;
 
     Vector3 GetMousePositionX()
     {
-        //Use of planes to determain the position of the mouse relative to the axis we are using
-        Plane planeX = new Plane(Vector3.up, transform.position);
-        Plane planeY = new Plane(Vector3.forward, transform.position);
+        ////Use of planes to determain the position of the mouse relative to the axis we are using
+        //Plane planeY = new Plane(Vector3.up, transform.position);
+        //Plane planeZ = new Plane(Vector3.forward, transform.position);
+
+        //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        ////for more effective results we use two planes that cover the parts that it needs to calculate for that axis 
+
+        //float distanceToPlane;
+
+        //if (planeY.Raycast(ray,out distanceToPlane))
+        //    pos = ray.GetPoint(distanceToPlane);
+
+        Plane planeX;
+
+        _camAngle = transform.position - Camera.main.transform.position;
+
+        _zAngle = Vector3.Angle(_camAngle, graphic[2].transform.forward);
+ 
+
+        if (_zAngle >= MaxAngle) //POD ODREĐENIM KUTEM KORISTI Z ILI Y OS
+        {
+            planeX = new Plane(Vector3.forward, transform.position);
+        }
+        else
+        {
+            planeX = new Plane(Vector3.up, transform.position);
+        }
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        //for more effective results we use two planes that cover the parts that it needs to calculate for that axis 
-
         float distanceToPlane;
 
-        if (planeX.Raycast(ray,out distanceToPlane))
-            pos = ray.GetPoint(distanceToPlane);
-
-        if (planeY.Raycast(ray, out distanceToPlane))
+        if (planeX.Raycast(ray, out distanceToPlane))
             pos = ray.GetPoint(distanceToPlane);
 
         return pos;

@@ -166,6 +166,7 @@ GameObject:
   - component: {fileID: 176761751412976385}
   - component: {fileID: 176761751412976415}
   - component: {fileID: 176761751412976414}
+  - component: {fileID: -6499562383181949004}
   m_Layer: 10
   m_Name: LASER
   m_TagString: Laser
@@ -317,6 +318,18 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!114 &-6499562383181949004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 176761751412976412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c374d25dbc4b5e4488b16c76f2fd3d9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &176761751502267533
 GameObject:
   m_ObjectHideFlags: 0

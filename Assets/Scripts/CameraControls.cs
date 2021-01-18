@@ -131,20 +131,22 @@ public class CameraControls : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit) && hit.transform.tag != "Move Tool")
             target = hit.transform;
-        if (target.transform == ground.transform)
-               target = null;
-        if (target == null)
+
+        if (target == null) // ako neki object provjeravaš da li postoji ili ne pa ga returnaš onda taj dio koda stavljaš ispred
             return;
+
+        
 
         while (target.parent != null) // gets the ultimate parent
         {
+            if (target.GetComponent<ParentScript>())
+                break;
             if (target.parent != null)
-            {
                 target = target.parent;
-                print(target);
-
-            }
         }
+
+        if (target.transform == ground.transform)
+            target = null;
     }
 
 
