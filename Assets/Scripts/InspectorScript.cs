@@ -112,11 +112,6 @@ public class InspectorScript : MonoBehaviour
 
             Set();
 
-
-         
-          
-
-
             //component
             if (!mass.isFocused)
                 mass.text = rb.mass.ToString();
@@ -124,9 +119,7 @@ public class InspectorScript : MonoBehaviour
             float i = 0;
 
             if (float.TryParse(mass.text, out i))
-            {
                 rb.mass = float.Parse(mass.text);
-            }
 
         }
 
@@ -163,6 +156,7 @@ public class InspectorScript : MonoBehaviour
     }
     void Set()
     {
+        bool dontApply = false;
 
         if (!pos[0].isFocused && !pos[1].isFocused && !pos[2].isFocused)
         {
@@ -171,7 +165,7 @@ public class InspectorScript : MonoBehaviour
             pos[2].text = (Mathf.Round((interest.transform.position.z) * 100) / 100).ToString();
         }
 
-            if (!scal[0].isFocused && !scal[1].isFocused && !scal[2].isFocused)
+        if (!scal[0].isFocused && !scal[1].isFocused && !scal[2].isFocused)
         {
             scal[0].text = (Mathf.Round((interest.transform.localScale.x) * 100) / 100).ToString();
             scal[1].text = (Mathf.Round((interest.transform.localScale.y) * 100) / 100).ToString();
@@ -185,9 +179,20 @@ public class InspectorScript : MonoBehaviour
             rot[2].text = (Mathf.Round((interest.transform.eulerAngles.z) * 100) / 100).ToString();
         }
 
-        interest.transform.position = new Vector3(float.Parse(pos[0].text), float.Parse(pos[1].text), float.Parse(pos[2].text));
-        interest.transform.localScale = new Vector3(float.Parse(scal[0].text), float.Parse(scal[1].text), float.Parse(scal[2].text));
-        interest.transform.rotation = Quaternion.Euler(float.Parse(rot[0].text), float.Parse(rot[1].text), float.Parse(rot[2].text));
+        for (int i = 0; i < rot.Length; i++)
+        {
+            if (rot[i].text == "" || scal[i].text == "" || pos[i].text == "")
+                dontApply = true;
+        }
+
+        if (!dontApply)
+        {
+            interest.transform.position = new Vector3(float.Parse(pos[0].text), float.Parse(pos[1].text), float.Parse(pos[2].text));
+            interest.transform.localScale = new Vector3(float.Parse(scal[0].text), float.Parse(scal[1].text), float.Parse(scal[2].text));
+            interest.transform.rotation = Quaternion.Euler(float.Parse(rot[0].text), float.Parse(rot[1].text), float.Parse(rot[2].text));
+        }
+
+
     }
 
     void SetBooleans(bool tread, bool laser, bool proximity, bool item, bool robot)
@@ -212,7 +217,6 @@ public class InspectorScript : MonoBehaviour
         if (itemIns)
         {
             physicsToggle = !physicsToggle;
-
             rb.useGravity = !physicsToggle;
             rb.isKinematic = physicsToggle;
         }
