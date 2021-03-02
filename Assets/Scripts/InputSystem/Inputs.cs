@@ -4,15 +4,42 @@ using UnityEngine;
 
 public class Inputs : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public static Inputs current;
+
+    public delegate void UserInput();
+    public event UserInput CameraRotInput;
+    public event UserInput FocusInput;
+
+    private void Awake()
     {
-        
+        current = this;
     }
 
-    // Update is called once per frame
+    void CameraRotate()
+    {
+        if (Input.GetKey(KeyCode.Mouse1))
+        {
+            if (CameraRotInput != null)
+            {
+                CameraRotInput();
+            }
+        }
+    }
+
+    void Focus()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            if (FocusInput != null)
+            {
+                FocusInput();
+            }
+        }
+    }
+
     void Update()
     {
-        
+        CameraRotate();
+        Focus();
     }
 }

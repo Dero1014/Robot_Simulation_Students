@@ -25,6 +25,10 @@ public class CameraControls : MonoBehaviour
     {
         rotX = transform.localEulerAngles.x;
         rotY = transform.localEulerAngles.y;
+
+        Inputs.current.CameraRotInput += CameraRotation;
+        Inputs.current.FocusInput += CameraFocus;
+
     }
 
 
@@ -32,18 +36,12 @@ public class CameraControls : MonoBehaviour
     {
         //I just clumped everything together
 
-        if (Input.GetKey(KeyCode.Mouse1))
-        {
-            CameraRotation();
             if (Input.GetKey(KeyCode.F))
                 CameraFocus();
-        }
         else if (Input.GetKey(KeyCode.Mouse2))
             CameraPan();
         else if (Input.GetKeyDown(KeyCode.Mouse0))
             CheckObject();
-        else if (Input.GetKeyDown(KeyCode.F))
-            CameraFocus();
 
         //prima input ond kotačića miša i tamo miće kameru
         CameraZoom();
