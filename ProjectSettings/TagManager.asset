@@ -16,6 +16,7 @@ TagManager:
   - Laser
   - TreadMill
   - Ground
+  - Scale
   layers:
   - Default
   - TransparentFX
