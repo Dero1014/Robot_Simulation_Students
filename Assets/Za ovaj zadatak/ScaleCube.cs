@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class ScaleCube : START
 {
-    public float Speed_Scal =5;
-
-
+  
     void Start()
     {
         PutIn(transform);
