@@ -50,7 +50,7 @@ public class BazaTest : MonoBehaviour
             if (mouseX != 0)
             {
                 Vector3 temp = transform.localScale; //nemozemo direktno mijenjati vrijednost x osi transforma pa spremamo u temp
-                temp.x += (mouseX * SpeedS.Speed_Scal); // Hvala Bogu inače bi se ranio s fucking ravnalom
+               // temp.x += (mouseX *S); // Hvala Bogu inače bi se ranio s fucking ravnalom
                 transform.localScale = temp;
             }
         }
