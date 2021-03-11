@@ -33,30 +33,8 @@ public class CamKontrol : MonoBehaviour
 
     void Update()
     {
-        // ----------Zumiranje----------
-        currentFOV = cam.fieldOfView;
-
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            currentFOV = startingFOV;
-        }
-
-        //UseWheel();
-
-        if (Input.GetKey(KeyCode.I))
-        {
-            currentFOV -= zoomRate;
-        }
-
-        if (Input.GetKey(KeyCode.O))
-        {
-            currentFOV += zoomRate;
-        }
-
-        currentFOV = Mathf.Clamp(currentFOV, minFOV, maxFOV);
-        cam.fieldOfView = currentFOV;
-
-
+        // ----------Zumiranje---------
+        UseWheel();
         //------Kretanje-----
         Kretanje();
 
