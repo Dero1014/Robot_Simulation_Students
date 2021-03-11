@@ -26,10 +26,12 @@ public class CameraControls : MonoBehaviour
         rotX = transform.localEulerAngles.x;
         rotY = transform.localEulerAngles.y;
 
-        Inputs.current.CameraRotInput += CameraRotation;
-        Inputs.current.FocusInput += CameraFocus;
-        Inputs.current.CameraFocRotInput += CameraRotation;
-        Inputs.current.CameraFocRotInput += CameraFocus;
+        UserInputs.current.CameraRotInput += CameraRotation;
+        UserInputs.current.FocusInput += CameraFocus;
+        UserInputs.current.CameraFocRotInput += CameraRotation;
+        UserInputs.current.CameraFocRotInput += CameraFocus;
+        UserInputs.current.CameraPanInput += CameraPan;
+        UserInputs.current.CheckObjectInput += CheckObject;
 
     }
 
@@ -37,12 +39,6 @@ public class CameraControls : MonoBehaviour
     void Update()
     {
         //I just clumped everything together
-
-        
-        if (Input.GetKey(KeyCode.Mouse2))
-            CameraPan();
-        else if (Input.GetKeyDown(KeyCode.Mouse0))
-            CheckObject();
 
         //prima input ond kotačića miša i tamo miće kameru
         CameraZoom();

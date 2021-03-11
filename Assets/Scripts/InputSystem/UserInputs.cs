@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UserInputs : MonoBehaviour
+public class UserInputs2 : MonoBehaviour
 {
-    public static UserInputs current;
+    public static UserInputs2 current;
 
     public delegate void UserInput();
     public event UserInput CameraRotInput;
