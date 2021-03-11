@@ -9,6 +9,7 @@ public class Inputs : MonoBehaviour
     public delegate void UserInput();
     public event UserInput CameraRotInput;
     public event UserInput FocusInput;
+    public event UserInput CameraFocRotInput;
 
     private void Awake()
     {
@@ -22,6 +23,14 @@ public class Inputs : MonoBehaviour
             if (CameraRotInput != null)
             {
                 CameraRotInput();
+            }
+            if (Input.GetKey(KeyCode.F))
+            {
+                if (CameraFocRotInput != null)
+                {
+                    CameraFocRotInput();
+                }
+                
             }
         }
     }

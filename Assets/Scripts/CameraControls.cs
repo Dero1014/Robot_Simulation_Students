@@ -28,6 +28,8 @@ public class CameraControls : MonoBehaviour
 
         Inputs.current.CameraRotInput += CameraRotation;
         Inputs.current.FocusInput += CameraFocus;
+        Inputs.current.CameraFocRotInput += CameraRotation;
+        Inputs.current.CameraFocRotInput += CameraFocus;
 
     }
 
@@ -36,9 +38,8 @@ public class CameraControls : MonoBehaviour
     {
         //I just clumped everything together
 
-            if (Input.GetKey(KeyCode.F))
-                CameraFocus();
-        else if (Input.GetKey(KeyCode.Mouse2))
+        
+        if (Input.GetKey(KeyCode.Mouse2))
             CameraPan();
         else if (Input.GetKeyDown(KeyCode.Mouse0))
             CheckObject();
@@ -89,7 +90,6 @@ public class CameraControls : MonoBehaviour
         {
             Vector3 focusPosition = target.position;
             //print("These are positions " + focusPosition + "  " + transform.position);
-            Vector3 direction = -(focusPosition - transform.position);
             //print("This is direction " + direction);
 
             float x = target.localScale.x;
@@ -111,7 +111,7 @@ public class CameraControls : MonoBehaviour
                     max = z;
             }
             // float focusDistance =  (x +  y + z)/ 3;
-            focusPosition += ((direction).normalized * focusDistance * max); 
+            focusPosition += (-transform.forward * focusDistance * max); 
             transform.position = focusPosition;
             transform.LookAt(target);
             //ili
