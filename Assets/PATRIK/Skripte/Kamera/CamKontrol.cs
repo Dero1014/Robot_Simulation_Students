@@ -7,9 +7,9 @@ public class CamKontrol : MonoBehaviour
     private Camera cam;
     private float startingFOV;
 
-    public float minFOV;
-    public float maxFOV;
-    public float zoomRate;
+    public float minFOV = 1;
+    public float maxFOV = 10;
+    public float zoomRate=5;
 
     private float currentFOV;
 
@@ -34,7 +34,28 @@ public class CamKontrol : MonoBehaviour
     void Update()
     {
         // ----------Zumiranje----------
-        UseWheel();
+        currentFOV = cam.fieldOfView;
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            currentFOV = startingFOV;
+        }
+
+        //UseWheel();
+
+        if (Input.GetKey(KeyCode.I))
+        {
+            currentFOV -= zoomRate;
+        }
+
+        if (Input.GetKey(KeyCode.O))
+        {
+            currentFOV += zoomRate;
+        }
+
+        currentFOV = Mathf.Clamp(currentFOV, minFOV, maxFOV);
+        cam.fieldOfView = currentFOV;
+
 
         //------Kretanje-----
         Kretanje();
@@ -53,6 +74,7 @@ public class CamKontrol : MonoBehaviour
     } // -Rotacija
     public void UseWheel()
     {
+        Debug.Log("55");
         currentFOV = cam.fieldOfView;
 
         float scroll = Input.GetAxis("Mouse ScrollWheel");
