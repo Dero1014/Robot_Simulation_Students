@@ -2,10 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//assign names to the axises
-public class MoveTool_Script : MonoBehaviour
+public class START : MonoBehaviour
 {
-    public Transform target;
+    public Transform NewTrans = null;
+    public Vector3 ManipulateThis;
+    public float Speed;
+    public string MyName = "";
+    bool _action = false;
+
+    public Transform target;          // iz move toola
     public GameObject holder;
     public bool holdToHand;
 
@@ -20,17 +25,18 @@ public class MoveTool_Script : MonoBehaviour
     bool xAxis = false;
     bool yAxis = false;
     bool zAxis = false;
-    bool distanceChecked = false;
+    bool distanceChecked = false;       // iz move toola
 
 
 
-    private void Start() 
 
+    public void PutIn(Transform trans)
     {
-
+        NewTrans = trans;
+        MyName = NewTrans.name;
     }
 
-    void Update()
+    public Vector3 Select()
     {
         if (!holdToHand)
             FindTargetedObject();
@@ -55,24 +61,83 @@ public class MoveTool_Script : MonoBehaviour
 
                 }
             }
+
+            if (Input.GetKey(KeyCode.Mouse0)) //IF HELD YOU CAN MOVE IT
+                ManipulateThis = MoveTool();
+            else //IF ITS NOT HELD THEN NOTHING IS PICKED
+            {
+                xAxis = false;
+                yAxis = false;
+                zAxis = false;
+                moveActive = false;
+                distanceChecked = false;
+            }
+            ChangeProperties();
+
+
+
+            return ManipulateThis;
         }
 
 
-        if (Input.GetKey(KeyCode.Mouse0)) //IF HELD YOU CAN MOVE IT
-            MoveTool();
-        else //IF ITS NOT HELD THEN NOTHING IS PICKED
-        {
-            xAxis = false;
-            yAxis = false;
-            zAxis = false;
-            moveActive = false;
-            distanceChecked = false;
-        }
-        ChangeProperties();
 
+        
     }
+    Vector3 MoveTool()
+    {
+        if (moveActive)
+        {
+            //move on X axis
+            if (xAxis)
+            {
 
-    void FindTargetedObject()
+
+                Vector3 mousePosition = GetMousePositionX(); //get the mouse position
+
+                if (!distanceChecked) //set the difference between the mouse and the origin point
+                {
+                    distanceChecked = true;
+                    distance = mousePosition - transform.position;
+                }
+
+                return (new Vector3(mousePosition.x - distance.x, transform.position.y, transform.position.z)) //apply the movement
+            }
+
+            if (yAxis)
+            {
+
+
+
+                Vector3 mousePosition = GetMousePositionY(); //get the mouse position
+
+                if (!distanceChecked) //set the difference between the mouse and the origin point
+                {
+                    distanceChecked = true;
+                    distance = mousePosition - transform.position;
+                }
+
+                return(new Vector3(transform.position.x, mousePosition.y - distance.y, transform.position.z)) //apply the movement
+            }
+
+            if (zAxis)
+            {
+
+
+
+                Vector3 mousePosition = GetMousePositionZ(); //get the mouse position
+
+                if (!distanceChecked) //set the difference between the mouse and the origin point
+                {
+                    distanceChecked = true;
+                    distance = mousePosition - transform.position;
+                }
+
+                return(new Vector3(transform.position.x, transform.position.y, mousePosition.z - distance.z)) //apply the movement
+            }
+
+        }
+    }
+    public FindTargetedObject()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hitObject;
@@ -87,7 +152,7 @@ public class MoveTool_Script : MonoBehaviour
                     {
                         holder.SetActive(true);
                         target = hitObject.transform;
-                        transform.position = target.position;
+                        transform.position = target.position; // transform.position = target.position
                     }
                     else
                     {
@@ -96,7 +161,7 @@ public class MoveTool_Script : MonoBehaviour
                     }
 
                 }
-                
+
                 if (hitObject.transform.GetComponentInParent<RobotCommands>())
                 {
                     holder.SetActive(false);
@@ -122,63 +187,6 @@ public class MoveTool_Script : MonoBehaviour
         if (target != null)
         {
             target.position = transform.position;
-        }
-    }
-
-
-
-void MoveTool()
-    {
-        if (moveActive)
-        {
-            //move on X axis
-            if (xAxis)
-            {
-                
-
-                Vector3 mousePosition = GetMousePositionX(); //get the mouse position
-
-                if (!distanceChecked) //set the difference between the mouse and the origin point
-                {
-                    distanceChecked = true;
-                    distance = mousePosition - transform.position;
-                }
-                
-                transform.position = new Vector3(mousePosition.x - distance.x, transform.position.y, transform.position.z); //apply the movement
-            }
-
-            if (yAxis)
-            {
-               
-
-
-                Vector3 mousePosition = GetMousePositionY(); //get the mouse position
-
-                if (!distanceChecked) //set the difference between the mouse and the origin point
-                {
-                    distanceChecked = true;
-                    distance = mousePosition - transform.position;
-                }
-
-                transform.position = new Vector3(transform.position.x, mousePosition.y - distance.y, transform.position.z); //apply the movement
-            }
-
-            if (zAxis)
-            {
-               
-
-
-                Vector3 mousePosition = GetMousePositionZ(); //get the mouse position
-
-                if (!distanceChecked) //set the difference between the mouse and the origin point
-                {
-                    distanceChecked = true;
-                    distance = mousePosition - transform.position;
-                }
-
-                transform.position = new Vector3(transform.position.x, transform.position.y, mousePosition.z - distance.z); //apply the movement
-            }
-
         }
     }
 
@@ -211,7 +219,7 @@ void MoveTool()
         _camAngle = transform.position - Camera.main.transform.position;
 
         _zAngle = Vector3.Angle(_camAngle, graphic[2].transform.forward);
- 
+
 
         if (_zAngle >= MaxAngle) //POD ODREĐENIM KUTEM KORISTI Z ILI Y OS
         {
@@ -275,3 +283,5 @@ void MoveTool()
     }
     #endregion
 }
+
+
