@@ -137,7 +137,7 @@ public class BAZA : MonoBehaviour
 
         }
     }
-    public FindTargetedObject()
+    public void FindTargetedObject()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hitObject;
@@ -180,7 +180,7 @@ public class BAZA : MonoBehaviour
             }
 
         }
-        return void;
+       
     }
     void ChangeProperties()
     {

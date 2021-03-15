@@ -127,7 +127,7 @@ public class MoveTool_Script : MonoBehaviour
 
 
 
-void MoveTool()
+    void MoveTool()
     {
         if (moveActive)
         {
