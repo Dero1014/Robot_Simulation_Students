@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class START : MonoBehaviour
+public class BAZA : MonoBehaviour
 {
     public Transform NewTrans = null;
     public Vector3 ManipulateThis;
@@ -100,7 +100,7 @@ public class START : MonoBehaviour
                     distance = mousePosition - transform.position;
                 }
 
-                return (new Vector3(mousePosition.x - distance.x, transform.position.y, transform.position.z)) //apply the movement
+                return (new Vector3(mousePosition.x - distance.x, transform.position.y, transform.position.z)); //apply the movement
             }
 
             if (yAxis)
@@ -116,7 +116,7 @@ public class START : MonoBehaviour
                     distance = mousePosition - transform.position;
                 }
 
-                return(new Vector3(transform.position.x, mousePosition.y - distance.y, transform.position.z)) //apply the movement
+                return (new Vector3(transform.position.x, mousePosition.y - distance.y, transform.position.z)); //apply the movement
             }
 
             if (zAxis)
@@ -132,7 +132,7 @@ public class START : MonoBehaviour
                     distance = mousePosition - transform.position;
                 }
 
-                return(new Vector3(transform.position.x, transform.position.y, mousePosition.z - distance.z)) //apply the movement
+                return (new Vector3(transform.position.x, transform.position.y, mousePosition.z - distance.z)); //apply the movement
             }
 
         }
@@ -180,7 +180,7 @@ public class START : MonoBehaviour
             }
 
         }
-
+        return void;
     }
     void ChangeProperties()
     {
