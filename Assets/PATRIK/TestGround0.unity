@@ -309,7 +309,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minFOV: 1
   maxFOV: 50
-  zoomRate: 5
+  zoomRate: 10
 --- !u!1 &1966713754
 GameObject:
   m_ObjectHideFlags: 0

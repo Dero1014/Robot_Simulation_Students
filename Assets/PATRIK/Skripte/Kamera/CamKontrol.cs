@@ -52,7 +52,6 @@ public class CamKontrol : MonoBehaviour
     } // -Rotacija
     public void UseWheel()
     {
-        Debug.Log("55");
         currentFOV = cam.fieldOfView;
 
         float scroll = Input.GetAxis("Mouse ScrollWheel");
