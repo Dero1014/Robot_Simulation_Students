@@ -139,7 +139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &54089880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -433,13 +433,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 879917966}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1bb8a332b60318b43a84c8744faa575e, type: 3}
+  m_Script: {fileID: 11500000, guid: 2072d8a453c2d7346ab6c6867c5d9991, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NewTrans: {fileID: 0}
-  ManipulateThis: {x: 0, y: 0, z: 0}
-  Speed: 0.1
-  MyName: Cube
 --- !u!65 &879917968
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -532,7 +528,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1138263259
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -641,7 +637,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1696775625
 MonoBehaviour:
   m_ObjectHideFlags: 0
