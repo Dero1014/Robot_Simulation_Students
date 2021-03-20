@@ -20,8 +20,10 @@ public class BazaTOOL : MonoBehaviour
     bool yAxis = false;
     bool zAxis = false;
     bool distanceChecked = false;
- 
-   public void RayRadnja()
+
+    // ROtacija
+    float rotationspeed = 1f;
+    public void RayRadnja()
     {
         if (!holdToHand)
             FindTargetedObject();
@@ -181,7 +183,7 @@ public class BazaTOOL : MonoBehaviour
 
     Vector3 GetMousePositionX()
     {
-    // bili su tu neki komentari koje sam orbisao jer ih je bilo pun K i ovo je kopija od MoveTool_Scripts.cs - Patrik
+    // bili su tu neki komentari koje sam obrisao jer ih je bilo pun K i ovo je kopija od MoveTool_Scripts.cs - Patrik
         Plane planeX;
 
         _camAngle = transform.position - Camera.main.transform.position;
@@ -250,4 +252,25 @@ public class BazaTOOL : MonoBehaviour
         return pos;
     }
     #endregion
+
+    //Rotacija
+    private void rotActive()
+    {
+        if (xAxis)
+        {
+
+
+            Vector3 mousePosition = GetMousePositionX(); //get the mouse position
+
+            if (!distanceChecked) //set the difference between the mouse and the origin point
+            {
+                distanceChecked = true;
+                distance = mousePosition - transform.position;
+            }
+
+            transform.position = new Vector3(mousePosition.x - distance.x, transform.position.y, transform.position.z); //apply the movement
+        }
+    }
+
+
 }

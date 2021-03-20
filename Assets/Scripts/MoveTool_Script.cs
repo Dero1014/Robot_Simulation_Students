@@ -21,15 +21,7 @@ public class MoveTool_Script : MonoBehaviour
     bool yAxis = false;
     bool zAxis = false;
     bool distanceChecked = false;
-
-
-
-    private void Start() 
-
-    {
-
-    }
-
+ 
     void Update()
     {
         if (!holdToHand)
