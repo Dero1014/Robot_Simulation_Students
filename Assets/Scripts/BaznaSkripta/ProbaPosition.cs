@@ -13,6 +13,6 @@ public class ProbaPosition : BAZA
     // Update is called once per frame
     void Update()
     {
-        NewTrans.position = Select();
+        NewTrans.eulerAngles = Select();
     }
 }

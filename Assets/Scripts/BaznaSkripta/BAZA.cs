@@ -38,9 +38,7 @@ public class BAZA : MonoBehaviour
 
     public Vector3 Select()
     {
-        if (!holdToHand)
-            FindTargetedObject();
-
+       
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hitObject;
 
@@ -48,7 +46,7 @@ public class BAZA : MonoBehaviour
         {
             if (Physics.Raycast(ray, out hitObject, Mathf.Infinity, moveLayer))
             {
-                if (hitObject.transform.tag == "Move Tool")
+                if (hitObject.transform.tag == MyName)
                 {
                     moveActive = true;
 
@@ -62,8 +60,11 @@ public class BAZA : MonoBehaviour
                 }
             }
 
-            if (Input.GetKey(KeyCode.Mouse0)) //IF HELD YOU CAN MOVE IT
+            if (Input.GetKey(KeyCode.Mouse0))
+            { //IF HELD YOU CAN MOVE IT
                 ManipulateThis = MoveTool();
+                return ManipulateThis;
+            }
             else //IF ITS NOT HELD THEN NOTHING IS PICKED
             {
                 xAxis = false;
@@ -72,16 +73,17 @@ public class BAZA : MonoBehaviour
                 moveActive = false;
                 distanceChecked = false;
             }
-            ChangeProperties();
 
+            // ChangeProperties();
 
 
             return ManipulateThis;
+
         }
 
+        return ManipulateThis;
 
 
-        
     }
     Vector3 MoveTool()
     {
@@ -103,6 +105,8 @@ public class BAZA : MonoBehaviour
                 return (new Vector3(mousePosition.x - distance.x, transform.position.y, transform.position.z)); //apply the movement
             }
 
+            return (new Vector3(0,0,0));
+
             if (yAxis)
             {
 
@@ -118,6 +122,7 @@ public class BAZA : MonoBehaviour
 
                 return (new Vector3(transform.position.x, mousePosition.y - distance.y, transform.position.z)); //apply the movement
             }
+            return (new Vector3(0, 0, 0));
 
             if (zAxis)
             {
@@ -134,54 +139,12 @@ public class BAZA : MonoBehaviour
 
                 return (new Vector3(transform.position.x, transform.position.y, mousePosition.z - distance.z)); //apply the movement
             }
+            return (new Vector3(0, 0, 0));
 
         }
+        return(new Vector3(0, 0, 0));
     }
-    public void FindTargetedObject()
-    {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hitObject;
 
-        if (Input.GetKeyDown(KeyCode.Mouse0)) //Check for what axis has been selected
-        {
-            if (Physics.Raycast(ray, out hitObject))
-            {
-                if (hitObject.transform.gameObject != null && hitObject.transform.name != "X" && hitObject.transform.name != "Y" && hitObject.transform.name != "Z" && !hitObject.transform.GetComponentInParent<RobotCommands>())
-                {
-                    if (hitObject.transform.tag != "Ground")
-                    {
-                        holder.SetActive(true);
-                        target = hitObject.transform;
-                        transform.position = target.position; // transform.position = target.position
-                    }
-                    else
-                    {
-                        holder.SetActive(false); //if it touches the ground
-                        target = null;
-                    }
-
-                }
-
-                if (hitObject.transform.GetComponentInParent<RobotCommands>())
-                {
-                    holder.SetActive(false);
-                    target = null;
-                }
-
-            }
-            else
-            {
-                holder.SetActive(false);
-            }
-
-            if (Input.GetMouseButtonDown(1))
-            {
-                target = null;
-            }
-
-        }
-       
-    }
     void ChangeProperties()
     {
         if (target != null)
