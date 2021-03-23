@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UserInputs2 : MonoBehaviour
+public class UserInputs : MonoBehaviour
 {
-    public static UserInputs2 current;
+    public static UserInputs current;
 
     public delegate void UserInput();
     public event UserInput CameraRotInput;
@@ -78,7 +78,7 @@ public class UserInputs2 : MonoBehaviour
         {
             if (DeleteItemInput != null)
             {
-                DeleteItemInput;
+                DeleteItemInput();
             }
 
         }
@@ -86,11 +86,11 @@ public class UserInputs2 : MonoBehaviour
 
     void PointCreator()
     {
-        if (Input.GetKeyDown("p") && console == null)
+        if (Input.GetKeyDown("p") ) //jedino radi kad nije upaljena konzola, to treba dodat
         { 
             if(PointsCreatorInput != null)
             {
-                PointsCreatorInput;
+                PointsCreatorInput();
             }
         }
     }
