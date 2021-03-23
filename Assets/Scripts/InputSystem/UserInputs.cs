@@ -12,6 +12,8 @@ public class UserInputs2 : MonoBehaviour
     public event UserInput CameraFocRotInput;
     public event UserInput CameraPanInput;
     public event UserInput CheckObjectInput;
+    public event UserInput DeleteItemInput;
+    public event UserInput PointsCreatorInput;
 
     private void Awake()
     {
@@ -70,8 +72,33 @@ public class UserInputs2 : MonoBehaviour
         }
     }
 
+    void DeleteAnItem()
+    {
+        if (Input.GetKeyDown(KeyCode.Delete))
+        {
+            if (DeleteItemInput != null)
+            {
+                DeleteItemInput;
+            }
+
+        }
+    }
+
+    void PointCreator()
+    {
+        if (Input.GetKeyDown("p") && console == null)
+        { 
+            if(PointsCreatorInput != null)
+            {
+                PointsCreatorInput;
+            }
+        }
+    }
+
     void Update()
     {
+        PointCreator();
+        DeleteAnItem();
         CameraRotate();
         Focus();
         Pan();

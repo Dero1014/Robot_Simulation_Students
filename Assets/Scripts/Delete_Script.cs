@@ -7,6 +7,11 @@ public class Delete_Script : MonoBehaviour
 
     private GameObject target;
 
+    void Start()
+    {
+        UserInputs.current.DeleteItemInput += DeleteItem;
+    }
+
     void Update()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -29,14 +34,14 @@ public class Delete_Script : MonoBehaviour
                 }
             }
         }
+    }
 
+    void DeleteItem()
+    {
         if (target != null)
         {
-            if (Input.GetKeyDown(KeyCode.Delete))
-            {
                 target.SetActive(false);
                 print("Delete");
-            }
         }
     }
 

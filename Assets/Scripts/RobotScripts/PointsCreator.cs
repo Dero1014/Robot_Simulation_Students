@@ -13,16 +13,22 @@ public class PointsCreator : MonoBehaviour
     public int rank = 0;
 
     int num = 0; //contains the number of points
+    void Start()
+    {
+        UserInputs.current.PointsCreatorInput += CreateAPoint;
+    }
+
     void Update()
     {
         RobotConsole console = FindObjectOfType<RobotConsole>();
+    }
 
-        if (Input.GetKeyDown("p") && console==null) // create a point and give it a name
-        {
-            GameObject clone = Instantiate(point, transform.position, Quaternion.identity);
-            clone.name = "P" + num.ToString();
-            clone.GetComponent<PointRank>().rank = rank;
-            num++;
-        }
+    void CreateAPoint()
+    {
+        // create a point and give it a name
+        GameObject clone = Instantiate(point, transform.position, Quaternion.identity);
+        clone.name = "P" + num.ToString();
+        clone.GetComponent<PointRank>().rank = rank;
+        num++;
     }
 }
