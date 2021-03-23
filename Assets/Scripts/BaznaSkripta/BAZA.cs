@@ -12,7 +12,6 @@ public class BAZA : MonoBehaviour
 
     public Transform target;          // iz move toola
     public GameObject holder;
-    public bool holdToHand;
 
     public Transform[] graphic;
 
@@ -41,29 +40,41 @@ public class BAZA : MonoBehaviour
        
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hitObject;
-
+        
         if (Input.GetKeyDown(KeyCode.Mouse0)) //Check for what axis has been selected
         {
+            
             if (Physics.Raycast(ray, out hitObject, Mathf.Infinity, moveLayer))
             {
-                if (hitObject.transform.tag == MyName)
+                
+                if (hitObject.transform.tag == "Move Tool")
                 {
+                    Debug.Log("checkam");
                     moveActive = true;
 
                     if (hitObject.transform.name == "X")
+                    {
                         xAxis = true;
+                        Debug.Log("x odabrana");
+                    }
                     else if (hitObject.transform.name == "Y")
+                    {
                         yAxis = true;
+                        Debug.Log("y odabrana");
+                    }
                     else if (hitObject.transform.name == "Z")
-                        zAxis = true;
+                    { zAxis = true;
+                      Debug.Log("z odabrana");
+                    }
 
                 }
             }
 
             if (Input.GetKey(KeyCode.Mouse0))
             { //IF HELD YOU CAN MOVE IT
-                ManipulateThis = MoveTool();
-                return ManipulateThis;
+                    Debug.Log("OtherSide");
+                    ManipulateThis = MoveTool();
+                    return ManipulateThis;
             }
             else //IF ITS NOT HELD THEN NOTHING IS PICKED
             {
@@ -74,7 +85,7 @@ public class BAZA : MonoBehaviour
                 distanceChecked = false;
             }
 
-            // ChangeProperties();
+            ChangeProperties();
 
 
             return ManipulateThis;
@@ -105,7 +116,7 @@ public class BAZA : MonoBehaviour
                 return (new Vector3(mousePosition.x - distance.x, transform.position.y, transform.position.z)); //apply the movement
             }
 
-            return (new Vector3(0,0,0));
+           
 
             if (yAxis)
             {
@@ -122,7 +133,7 @@ public class BAZA : MonoBehaviour
 
                 return (new Vector3(transform.position.x, mousePosition.y - distance.y, transform.position.z)); //apply the movement
             }
-            return (new Vector3(0, 0, 0));
+            
 
             if (zAxis)
             {
@@ -149,7 +160,7 @@ public class BAZA : MonoBehaviour
     {
         if (target != null)
         {
-            target.position = transform.position;
+            transform.position = transform.position;
         }
     }
 
