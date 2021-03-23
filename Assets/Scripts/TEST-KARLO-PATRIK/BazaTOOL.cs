@@ -4,6 +4,17 @@ using UnityEngine;
 
 public class BazaTOOL : MonoBehaviour
 {
+    public Transform NewTrans = null;
+    public Vector3 ManipulateThis;
+
+    public float Speed; // - treba izbaciti jer treba gledali brzinu miša
+    public string MyTag = "";
+
+    bool _action = false;
+
+    /// <summary>
+    /// //////////////////////////////
+    /// </summary>
     public Transform target;
     public GameObject holder;
     public bool holdToHand;
@@ -21,50 +32,49 @@ public class BazaTOOL : MonoBehaviour
     bool zAxis = false;
     bool distanceChecked = false;
 
-    // ROtacija
-    float rotationspeed = 1f;
-    public void RayRadnja()
+    public void PutIn(Transform trans)
     {
-        if (!holdToHand)
-            FindTargetedObject();
+        NewTrans = trans;
+        MyTag = NewTrans.tag;
+    }
 
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hitObject;
 
-        if (Input.GetKeyDown(KeyCode.Mouse0)) //Check for what axis has been selected
+    public Vector3 SelectMe()
+    {
+        if (Input.GetMouseButtonDown(0))
         {
-            if (Physics.Raycast(ray, out hitObject, Mathf.Infinity, moveLayer))
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hitObject;
+            if (Physics.Raycast(ray, out hitObject))
             {
-                if (hitObject.transform.tag == "Move Tool")
-                {
-                    moveActive = true;
-
-                    if (hitObject.transform.name == "X")
-                        xAxis = true;
-                    else if (hitObject.transform.name == "Y")
-                        yAxis = true;
-                    else if (hitObject.transform.name == "Z")
-                        zAxis = true;
-
-                }
+                if (hitObject.transform.gameObject.tag == "Move Tool")
+                    _action = true;
+                if (hitObject.transform.name == "X")
+                    xAxis = true;
+                else if (hitObject.transform.name == "Y")
+                    yAxis = true;
+                else if (hitObject.transform.name == "Z")
+                    zAxis = true;
             }
         }
 
-
-        if (Input.GetKey(KeyCode.Mouse0)) //IF HELD YOU CAN MOVE IT
-            MoveTool();
-        else //IF ITS NOT HELD THEN NOTHING IS PICKED
+        if (Input.GetMouseButton(0) && _action)
         {
-            xAxis = false;
-            yAxis = false;
-            zAxis = false;
-            moveActive = false;
-            distanceChecked = false;
+            //ACTION
+            float mouseX = Input.GetAxis("Mouse X");
+            if (mouseX != 0)
+            {
+                Vector3 temp = ManipulateThis;
+                temp.x += (mouseX * Speed);
+                ManipulateThis = temp;
+            }
         }
-        ChangeProperties();
 
+        if (Input.GetMouseButtonUp(0))
+            _action = false;
+
+        return ManipulateThis;
     }
-
     void FindTargetedObject()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -107,14 +117,6 @@ public class BazaTOOL : MonoBehaviour
                 target = null;
             }
 
-        }
-
-    }
-    void ChangeProperties()
-    {
-        if (target != null)
-        {
-            target.position = transform.position;
         }
     }
     void MoveTool()
@@ -172,8 +174,6 @@ public class BazaTOOL : MonoBehaviour
         }
     }
 
-    #region mousePosition
-
     Vector3 pos;
     [Space(10)]
     int MaxAngle = 45;
@@ -183,7 +183,7 @@ public class BazaTOOL : MonoBehaviour
 
     Vector3 GetMousePositionX()
     {
-    // bili su tu neki komentari koje sam obrisao jer ih je bilo pun K i ovo je kopija od MoveTool_Scripts.cs - Patrik
+        
         Plane planeX;
 
         _camAngle = transform.position - Camera.main.transform.position;
@@ -251,26 +251,4 @@ public class BazaTOOL : MonoBehaviour
 
         return pos;
     }
-    #endregion
-
-    //Rotacija
-    private void rotActive()
-    {
-        if (xAxis)
-        {
-
-
-            Vector3 mousePosition = GetMousePositionX(); //get the mouse position
-
-            if (!distanceChecked) //set the difference between the mouse and the origin point
-            {
-                distanceChecked = true;
-                distance = mousePosition - transform.position;
-            }
-
-            transform.position = new Vector3(mousePosition.x - distance.x, transform.position.y, transform.position.z); //apply the movement
-        }
-    }
-
-
 }

@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class MoveToolNEW : BazaTOOL
 {
+    private void Start()
+    {
+        PutIn(transform);
+    }
     void Update()
     {
-        RayRadnja();
+        NewTrans.position = SelectMe(); 
     }
 
    
-
-
-
 }

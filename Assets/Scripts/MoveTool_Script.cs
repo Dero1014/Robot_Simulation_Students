@@ -44,7 +44,6 @@ public class MoveTool_Script : MonoBehaviour
                         yAxis = true;
                     else if (hitObject.transform.name == "Z")
                         zAxis = true;
-
                 }
             }
         }

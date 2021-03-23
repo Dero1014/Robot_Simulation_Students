@@ -1703,25 +1703,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 842416135097898675}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &180601225
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 180601220}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93e64f5204345b94392d2d8327c0f2ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  holder: {fileID: 0}
-  holdToHand: 0
-  graphic: []
-  moveLayer:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!114 &180601226
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1734,6 +1715,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b06b480c903629743a8165b854578b3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  NewTrans: {fileID: 0}
+  ManipulateThis: {x: 0, y: 0, z: 0}
+  Speed: 5
+  MyTag: 
   target: {fileID: 0}
   holder: {fileID: 1960585211}
   holdToHand: 0
@@ -15518,6 +15503,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9143248538840620598, guid: b9841ebf43bd7dd4196a5b0f2c957f58,
+        type: 3}
+      propertyPath: m_TagString
+      value: Move Tool
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9841ebf43bd7dd4196a5b0f2c957f58, type: 3}
