@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProbaPosition : BAZA
+public class ProbaPosition : BAZA_2
 {
 
-    public static int counter = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,8 +14,8 @@ public class ProbaPosition : BAZA
     // Update is called once per frame
     void Update()
     {
-        NewTrans.position = Select();
-        Debug.Log("update");
+        ShakeIt();
+        
         
     }
 }

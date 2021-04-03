@@ -138,7 +138,7 @@ PrefabInstance:
     - target: {fileID: 6997978345407499181, guid: 3cc23881ffb9ccd4f99e8df9c4351503,
         type: 3}
       propertyPath: m_Name
-      value: Move Tool (1)
+      value: Rot Tool
       objectReference: {fileID: 0}
     - target: {fileID: 6997978345407499181, guid: 3cc23881ffb9ccd4f99e8df9c4351503,
         type: 3}
@@ -374,7 +374,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NewTrans: {fileID: 0}
   ManipulateThis: {x: 0, y: 0, z: 0}
-  Speed: 0
   MyName: 
   target: {fileID: 0}
   holder: {fileID: 0}
@@ -1027,7 +1026,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NewTrans: {fileID: 0}
   ManipulateThis: {x: 0, y: 0, z: 0}
-  Speed: 5
   MyName: 
   target: {fileID: 0}
   holder: {fileID: 1508465739}
@@ -1050,6 +1048,33 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 8582498248383680316}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1912453477 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3081715609868480900, guid: 54258830e76509848bd56cc67cf2d814,
+    type: 3}
+  m_PrefabInstance: {fileID: 3081715610123517467}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1912453480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1912453477}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2072d8a453c2d7346ab6c6867c5d9991, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NewTrans: {fileID: 0}
+  ManipulateThis: {x: 0, y: 0, z: 0}
+  MyName: 
+  target: {fileID: 0}
+  holder: {fileID: 0}
+  graphic: []
+  moveLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!43 &1961601719
 Mesh:
   m_ObjectHideFlags: 0
@@ -1272,6 +1297,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3081715609868480900, guid: 54258830e76509848bd56cc67cf2d814,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 3081715609868480954, guid: 54258830e76509848bd56cc67cf2d814,
         type: 3}
       propertyPath: planes.Array.data[0]
@@ -1286,6 +1316,11 @@ PrefabInstance:
         type: 3}
       propertyPath: planes.Array.data[2]
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3081715609868480954, guid: 54258830e76509848bd56cc67cf2d814,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3081715609868480955, guid: 54258830e76509848bd56cc67cf2d814,
         type: 3}
@@ -1352,6 +1387,26 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1213307687}
+    - target: {fileID: 3081715610190124462, guid: 54258830e76509848bd56cc67cf2d814,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 3081715610436344396, guid: 54258830e76509848bd56cc67cf2d814,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 3081715610445512376, guid: 54258830e76509848bd56cc67cf2d814,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 3081715610944077541, guid: 54258830e76509848bd56cc67cf2d814,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 3081715610944077592, guid: 54258830e76509848bd56cc67cf2d814,
         type: 3}
       propertyPath: m_Mesh
@@ -1362,6 +1417,21 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1961601719}
+    - target: {fileID: 3081715610957102485, guid: 54258830e76509848bd56cc67cf2d814,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 3081715611386511874, guid: 54258830e76509848bd56cc67cf2d814,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 3081715611739234085, guid: 54258830e76509848bd56cc67cf2d814,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 3081715611739234136, guid: 54258830e76509848bd56cc67cf2d814,
         type: 3}
       propertyPath: m_Mesh

@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BAZA : MonoBehaviour
+public class BAZA_2 : MonoBehaviour
 {
     public Transform NewTrans = null;
     public Vector3 ManipulateThis;
-   
+
     public string MyName = "";
     bool _action = false;
 
@@ -21,16 +21,17 @@ public class BAZA : MonoBehaviour
 
     Vector3 distance = Vector3.zero;
 
-    
-    
-    
+
+
+    bool rotActive = false;
     bool moveActive = false;
     bool xAxis = false;
     bool yAxis = false;
     bool zAxis = false;
-    bool distanceChecked = false; 
-   
-        
+    bool distanceChecked = false;
+
+ 
+
 
 
 
@@ -41,69 +42,52 @@ public class BAZA : MonoBehaviour
         MyName = NewTrans.name;
     }
 
-    public Vector3 Select()
-    {
 
+    public void ShakeIt()
+    {
         FindTargetedObject();
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hitObject;
-        
+
         if (Input.GetKeyDown(KeyCode.Mouse0)) //Check for what axis has been selected
         {
-            
             if (Physics.Raycast(ray, out hitObject, Mathf.Infinity, moveLayer))
             {
-                
+
+                if (hitObject.transform.name == "X")
+                    xAxis = true;
+                else if (hitObject.transform.name == "Y")
+                    yAxis = true;
+                else if (hitObject.transform.name == "Z")
+                    zAxis = true;
+
                 if (hitObject.transform.tag == "Move Tool")
                 {
-                    Debug.Log("checkam");
                     moveActive = true;
-                    
-                    
-
-                    if (hitObject.transform.name == "X")
-                    {
-                        xAxis = true;
-                        Debug.Log("x odabrana");
-                    }
-                    else if (hitObject.transform.name == "Y")
-                    {
-                        yAxis = true;
-                        Debug.Log("y odabrana");
-                    }
-                    else if (hitObject.transform.name == "Z")
-                    { zAxis = true;
-                      Debug.Log("z odabrana");
-                    }
-
+                    Debug.Log("move");
                 }
+                else if (hitObject.transform.tag == "Rot Tool")
+                {
+                    Debug.Log("Rot");
+                    rotActive = true;
+                }
+                    
             }
-
-            if (Input.GetKey(KeyCode.Mouse0))
-            { //IF HELD YOU CAN MOVE IT
-                    Debug.Log("OtherSide");
-                    ManipulateThis = MoveTool();
-                    return ManipulateThis;
-            }
-            else //IF ITS NOT HELD THEN NOTHING IS PICKED
-            {
-                xAxis = false;
-                yAxis = false;
-                zAxis = false;
-                moveActive = false;
-                distanceChecked = false;
-              
-            }
-
-
-            return ManipulateThis;
-
+        }
+        if (Input.GetKey(KeyCode.Mouse0)) //IF HELD YOU CAN MOVE IT
+            MoveTool();
+        else
+        {
+            xAxis = false;
+            yAxis = false;
+            zAxis = false;
+            moveActive = false;
+            rotActive = false; 
+            distanceChecked = false;
         }
 
-        return ManipulateThis;
-
-
+        
     }
 
     void FindTargetedObject()
@@ -123,7 +107,7 @@ public class BAZA : MonoBehaviour
                         target = hitObject.transform;
 
                         transform.position = target.position;
-                        Debug.Log("yes");
+                       
                     }
                     else
                     {
@@ -152,81 +136,79 @@ public class BAZA : MonoBehaviour
 
         }
 
-        ChangeProperties();
+        
 
 
     }
-
-    Vector3 MoveTool()
+    void MoveTool()
     {
-        if (moveActive)
+        if (xAxis)
         {
-            //move on X axis
-            if (xAxis)
+
+            Vector3 mousePosition = GetMousePositionX(); //get the mouse position
+
+            if (!distanceChecked) //set the difference between the mouse and the origin point
             {
-
-
-                Vector3 mousePosition = GetMousePositionX(); //get the mouse position
-
-                if (!distanceChecked) //set the difference between the mouse and the origin point
-                {
-                    distanceChecked = true;
-                    distance = mousePosition - transform.position;
-                }
-
-                return (new Vector3(mousePosition.x - distance.x, transform.position.y, transform.position.z)); //apply the movement
+                distanceChecked = true;
+                distance = mousePosition - transform.position;
             }
+            if (moveActive)
+                transform.position = new Vector3(mousePosition.x - distance.x, transform.position.y, transform.position.z); //apply the movement
+            else if (rotActive)
+                transform.eulerAngles = new Vector3(mousePosition.x - distance.x, transform.position.y, transform.position.z);
+        }
 
-           
+        if (yAxis)
+        {
 
-            if (yAxis)
+
+            Vector3 mousePosition = GetMousePositionY(); //get the mouse position
+
+            if (!distanceChecked) //set the difference between the mouse and the origin point
             {
-
-
-
-                Vector3 mousePosition = GetMousePositionY(); //get the mouse position
-
-                if (!distanceChecked) //set the difference between the mouse and the origin point
-                {
-                    distanceChecked = true;
-                    distance = mousePosition - transform.position;
-                }
-
-                return (new Vector3(transform.position.x, mousePosition.y - distance.y, transform.position.z)); //apply the movement
+                distanceChecked = true;
+                distance = mousePosition - transform.position;
             }
-            
-
-            if (zAxis)
-            {
-
-
-
-                Vector3 mousePosition = GetMousePositionZ(); //get the mouse position
-
-                if (!distanceChecked) //set the difference between the mouse and the origin point
-                {
-                    distanceChecked = true;
-                    distance = mousePosition - transform.position;
-                }
-
-                return (new Vector3(transform.position.x, transform.position.y, mousePosition.z - distance.z)); //apply the movement
-            }
-            return (new Vector3(0, 0, 0));
+            if (moveActive)
+                transform.position = new Vector3(transform.position.x, mousePosition.y - distance.y, transform.position.z); //apply the movement
+            else if (rotActive)
+                transform.eulerAngles = new Vector3(transform.position.x, mousePosition.y - distance.y, transform.position.z);
 
         }
-        return(new Vector3(0, 0, 0));
-    }
 
-    
+        if (zAxis)
+        {
 
-    void ChangeProperties()
-    {
+
+            Vector3 mousePosition = GetMousePositionZ(); //get the mouse position
+
+            if (!distanceChecked) //set the difference between the mouse and the origin point
+            {
+                distanceChecked = true;
+                distance = mousePosition - transform.position;
+            }
+            if (moveActive)
+                transform.position = new Vector3(transform.position.x, transform.position.y, mousePosition.z - distance.z); //apply the movement
+            else if (rotActive)
+                transform.eulerAngles = new Vector3(transform.position.x, transform.position.y, mousePosition.z - distance.z);
+
+        }
+       
         if (target != null)
         {
-            target.position = transform.position;
+            if (moveActive)
+                target.position = transform.position;
+            else if (rotActive)
+                target.eulerAngles = transform.eulerAngles;
         }
+            
+
+      
+
     }
 
+
+   
     #region mousePosition
 
     Vector3 pos;
@@ -320,5 +302,3 @@ public class BAZA : MonoBehaviour
     }
     #endregion
 }
-
-
