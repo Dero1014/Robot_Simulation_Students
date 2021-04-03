@@ -82,7 +82,9 @@ public class MoveTool_Script : MonoBehaviour
                     {
                         holder.SetActive(true);
                         target = hitObject.transform;
+
                         transform.position = target.position;
+                        Debug.Log("yes");
                     }
                     else
                     {

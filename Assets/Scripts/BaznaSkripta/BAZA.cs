@@ -6,11 +6,12 @@ public class BAZA : MonoBehaviour
 {
     public Transform NewTrans = null;
     public Vector3 ManipulateThis;
-    public float Speed;
+   
     public string MyName = "";
     bool _action = false;
 
-    public Transform target;          // iz move toola
+
+    public Transform target;
     public GameObject holder;
 
     public Transform[] graphic;
@@ -20,11 +21,16 @@ public class BAZA : MonoBehaviour
 
     Vector3 distance = Vector3.zero;
 
+    
+    
+    
     bool moveActive = false;
     bool xAxis = false;
     bool yAxis = false;
     bool zAxis = false;
-    bool distanceChecked = false;       // iz move toola
+    bool distanceChecked = false; 
+   
+        
 
 
 
@@ -37,7 +43,9 @@ public class BAZA : MonoBehaviour
 
     public Vector3 Select()
     {
-       
+
+        FindTargetedObject();
+
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hitObject;
         
@@ -51,6 +59,8 @@ public class BAZA : MonoBehaviour
                 {
                     Debug.Log("checkam");
                     moveActive = true;
+                    
+                    
 
                     if (hitObject.transform.name == "X")
                     {
@@ -83,9 +93,8 @@ public class BAZA : MonoBehaviour
                 zAxis = false;
                 moveActive = false;
                 distanceChecked = false;
+              
             }
-
-            ChangeProperties();
 
 
             return ManipulateThis;
@@ -96,6 +105,58 @@ public class BAZA : MonoBehaviour
 
 
     }
+
+    void FindTargetedObject()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hitObject;
+
+        if (Input.GetKeyDown(KeyCode.Mouse0)) //Check for what axis has been selected
+        {
+            if (Physics.Raycast(ray, out hitObject))
+            {
+                if (hitObject.transform.gameObject != null && hitObject.transform.name != "X" && hitObject.transform.name != "Y" && hitObject.transform.name != "Z" && !hitObject.transform.GetComponentInParent<RobotCommands>())
+                {
+                    if (hitObject.transform.tag != "Ground")
+                    {
+                        holder.SetActive(true);
+                        target = hitObject.transform;
+
+                        transform.position = target.position;
+                        Debug.Log("yes");
+                    }
+                    else
+                    {
+                        holder.SetActive(false); //if it touches the ground
+                        target = null;
+                    }
+
+                }
+
+                if (hitObject.transform.GetComponentInParent<RobotCommands>())
+                {
+                    holder.SetActive(false);
+                    target = null;
+                }
+
+            }
+            else
+            {
+                holder.SetActive(false);
+            }
+
+            if (Input.GetMouseButtonDown(1))
+            {
+                target = null;
+            }
+
+        }
+
+        ChangeProperties();
+
+
+    }
+
     Vector3 MoveTool()
     {
         if (moveActive)
@@ -156,11 +217,13 @@ public class BAZA : MonoBehaviour
         return(new Vector3(0, 0, 0));
     }
 
+    
+
     void ChangeProperties()
     {
         if (target != null)
         {
-            transform.position = transform.position;
+            target.position = transform.position;
         }
     }
 

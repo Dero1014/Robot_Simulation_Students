@@ -131,6 +131,10 @@ PrefabInstance:
       propertyPath: Cam
       value: 
       objectReference: {fileID: 1805635471}
+    - target: {fileID: 813592645, guid: 3cc23881ffb9ccd4f99e8df9c4351503, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6997978345407499181, guid: 3cc23881ffb9ccd4f99e8df9c4351503,
         type: 3}
       propertyPath: m_Name
@@ -355,7 +359,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &542221412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -374,7 +378,6 @@ MonoBehaviour:
   MyName: 
   target: {fileID: 0}
   holder: {fileID: 0}
-  holdToHand: 0
   graphic: []
   moveLayer:
     serializedVersion: 2
@@ -647,7 +650,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh18054
+  m_Name: pb_Mesh-1280
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -841,7 +844,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh17146
+  m_Name: pb_Mesh-1282
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1024,11 +1027,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NewTrans: {fileID: 0}
   ManipulateThis: {x: 0, y: 0, z: 0}
-  Speed: 0
+  Speed: 5
   MyName: 
   target: {fileID: 0}
   holder: {fileID: 1508465739}
-  holdToHand: 0
   graphic:
   - {fileID: 99921919}
   - {fileID: 1254250889}
@@ -1054,7 +1056,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh17860
+  m_Name: pb_Mesh-1264
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1264,6 +1266,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: RotTool
+      objectReference: {fileID: 0}
+    - target: {fileID: 3081715609868480900, guid: 54258830e76509848bd56cc67cf2d814,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3081715609868480954, guid: 54258830e76509848bd56cc67cf2d814,
         type: 3}
