@@ -140,6 +140,8 @@ public class BAZA_2 : MonoBehaviour
 
 
     }
+
+    //yes
     void MoveTool()
     {
         if (xAxis)
