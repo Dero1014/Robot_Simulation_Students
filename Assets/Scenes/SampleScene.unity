@@ -222,12 +222,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3cc23881ffb9ccd4f99e8df9c4351503, type: 3}
---- !u!4 &99921919 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6997978344407593962, guid: 3cc23881ffb9ccd4f99e8df9c4351503,
-    type: 3}
-  m_PrefabInstance: {fileID: 65402487}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &160264968
 GameObject:
   m_ObjectHideFlags: 0
@@ -294,24 +288,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &258225046 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6997978344407593962, guid: 3cc23881ffb9ccd4f99e8df9c4351503,
-    type: 3}
-  m_PrefabInstance: {fileID: 2139149854}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &329216025 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6997978344487852403, guid: 3cc23881ffb9ccd4f99e8df9c4351503,
-    type: 3}
-  m_PrefabInstance: {fileID: 65402487}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &427612796 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6997978344487852403, guid: 3cc23881ffb9ccd4f99e8df9c4351503,
-    type: 3}
-  m_PrefabInstance: {fileID: 2139149854}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &515626539 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5204003588075320144, guid: 538ed7872c42baa4a963605c9703b6fb,
@@ -399,15 +375,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2072d8a453c2d7346ab6c6867c5d9991, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NewTrans: {fileID: 0}
-  ManipulateThis: {x: 0, y: 0, z: 0}
-  MyName: 
-  target: {fileID: 0}
-  holder: {fileID: 0}
-  graphic: []
-  moveLayer:
+  MainTransform: {fileID: 0}
+  Value: {x: 0, y: 0, z: 0}
+  NameTransform: 
+  ParentContainer: {fileID: 0}
+  Graphic: []
+  ToolLayer:
     serializedVersion: 2
     m_Bits: 0
+  TargetObject: {fileID: 0}
 --- !u!65 &542221413
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -857,24 +833,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2072d8a453c2d7346ab6c6867c5d9991, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NewTrans: {fileID: 0}
-  ManipulateThis: {x: 0, y: 0, z: 0}
-  MyName: 
-  target: {fileID: 0}
-  holder: {fileID: 1059729805}
-  graphic:
-  - {fileID: 258225046}
-  - {fileID: 1463428231}
-  - {fileID: 427612796}
-  moveLayer:
+  MainTransform: {fileID: 0}
+  Value: {x: 0, y: 0, z: 0}
+  NameTransform: 
+  ParentContainer: {fileID: 0}
+  Graphic: []
+  ToolLayer:
     serializedVersion: 2
-    m_Bits: 4096
---- !u!1 &1059729805 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6997978344727555087, guid: 3cc23881ffb9ccd4f99e8df9c4351503,
-    type: 3}
-  m_PrefabInstance: {fileID: 2139149854}
-  m_PrefabAsset: {fileID: 0}
+    m_Bits: 0
+  TargetObject: {fileID: 0}
 --- !u!1 &1071365351
 GameObject:
   m_ObjectHideFlags: 0
@@ -1100,12 +1067,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1254250889 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6997978345170244306, guid: 3cc23881ffb9ccd4f99e8df9c4351503,
-    type: 3}
-  m_PrefabInstance: {fileID: 65402487}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1299797511 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6997978345407499181, guid: 3cc23881ffb9ccd4f99e8df9c4351503,
@@ -1124,30 +1085,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2072d8a453c2d7346ab6c6867c5d9991, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NewTrans: {fileID: 0}
-  ManipulateThis: {x: 0, y: 0, z: 0}
-  MyName: 
-  target: {fileID: 0}
-  holder: {fileID: 1508465739}
-  graphic:
-  - {fileID: 99921919}
-  - {fileID: 1254250889}
-  - {fileID: 329216025}
-  moveLayer:
+  MainTransform: {fileID: 0}
+  Value: {x: 0, y: 0, z: 0}
+  NameTransform: 
+  ParentContainer: {fileID: 0}
+  Graphic: []
+  ToolLayer:
     serializedVersion: 2
     m_Bits: 4096
---- !u!4 &1463428231 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6997978345170244306, guid: 3cc23881ffb9ccd4f99e8df9c4351503,
-    type: 3}
-  m_PrefabInstance: {fileID: 2139149854}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1508465739 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6997978344727555087, guid: 3cc23881ffb9ccd4f99e8df9c4351503,
-    type: 3}
-  m_PrefabInstance: {fileID: 65402487}
-  m_PrefabAsset: {fileID: 0}
+  TargetObject: {fileID: 0}
 --- !u!4 &1805635471 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8582498248801608264, guid: 40f9e401ecf04b64990cb09626c4f9a8,
@@ -1178,15 +1124,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2072d8a453c2d7346ab6c6867c5d9991, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NewTrans: {fileID: 1912453479}
-  ManipulateThis: {x: 0, y: 0, z: 0}
-  MyName: RotTool
-  target: {fileID: 0}
-  holder: {fileID: 1244697624}
-  graphic: []
-  moveLayer:
+  MainTransform: {fileID: 0}
+  Value: {x: 0, y: 0, z: 0}
+  NameTransform: 
+  ParentContainer: {fileID: 0}
+  Graphic: []
+  ToolLayer:
     serializedVersion: 2
-    m_Bits: 8192
+    m_Bits: 0
+  TargetObject: {fileID: 0}
 --- !u!43 &1961601719
 Mesh:
   m_ObjectHideFlags: 0

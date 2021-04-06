@@ -4,73 +4,67 @@ using UnityEngine;
 
 public class BAZA_2 : MonoBehaviour
 {
-    public Transform NewTrans = null;
-    public Vector3 ManipulateThis;
+    public Transform MainTransform = null;
+    public Vector3 Value;
 
-    public string MyName = "";
-    bool _action = false;
+    public string NameTransform = "";
 
+    public GameObject ParentContainer;
 
-    public Transform target;
-    public GameObject holder;
-
-    public Transform[] graphic;
+    public Transform[] Graphic;
 
     [Space(10)]
-    public LayerMask moveLayer;
+    public LayerMask ToolLayer;
 
-    Vector3 distance = Vector3.zero;
+    private Transform _targetObject;
 
+    Vector3 _distance = Vector3.zero;
 
+    Vector3 _mainValues;
 
-    bool rotActive = false;
-    bool moveActive = false;
-    bool xAxis = false;
-    bool yAxis = false;
-    bool zAxis = false;
-    bool distanceChecked = false;
-
- 
-
-
+    bool _rotActive = false;
+    bool _moveActive = false;
+    bool _xAxis = false;
+    bool _yAxis = false;
+    bool _zAxis = false;
+    bool _distanceChecked = false;
 
 
-
-    public void PutIn(Transform trans)
+    public void PutIn(Transform myTrans, Vector3 myProperty) //postaviti naš transform i njegovo ime
     {
-        NewTrans = trans;
-        MyName = NewTrans.name;
+        MainTransform = myTrans;
+        NameTransform = MainTransform.name;
+        ParentContainer = myTrans.parent.gameObject;
+        _mainValues = myProperty;
+        Value = _mainValues;
+        print(_mainValues);
     }
 
 
-    public void ShakeIt()
+    public void Main()
     {
-        FindTargetedObject();
-
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hitObject;
 
         if (Input.GetKeyDown(KeyCode.Mouse0)) //Check for what axis has been selected
         {
-            if (Physics.Raycast(ray, out hitObject, Mathf.Infinity, moveLayer))
+            if (Physics.Raycast(ray, out hitObject, Mathf.Infinity, ToolLayer))
             {
 
                 if (hitObject.transform.name == "X")
-                    xAxis = true;
+                    _xAxis = true;
                 else if (hitObject.transform.name == "Y")
-                    yAxis = true;
+                    _yAxis = true;
                 else if (hitObject.transform.name == "Z")
-                    zAxis = true;
+                    _zAxis = true;
 
                 if (hitObject.transform.tag == "Move Tool")
                 {
-                    moveActive = true;
-                    Debug.Log("move");
+                    _moveActive = true;
                 }
                 else if (hitObject.transform.tag == "Rot Tool")
                 {
-                    Debug.Log("Rot");
-                    rotActive = true;
+                    _rotActive = true;
                 }
                     
             }
@@ -79,136 +73,119 @@ public class BAZA_2 : MonoBehaviour
             MoveTool();
         else
         {
-            xAxis = false;
-            yAxis = false;
-            zAxis = false;
-            moveActive = false;
-            rotActive = false; 
-            distanceChecked = false;
+            _xAxis = false;
+            _yAxis = false;
+            _zAxis = false;
+            _moveActive = false;
+            _rotActive = false; 
+            _distanceChecked = false;
         }
 
         
     }
 
-    void FindTargetedObject()
+    public Transform FindTargetedObject()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); //casta ray
         RaycastHit hitObject;
 
-        if (Input.GetKeyDown(KeyCode.Mouse0)) //Check for what axis has been selected
+        if (Physics.Raycast(ray, out hitObject, Mathf.Infinity, ~ToolLayer))
         {
-            if (Physics.Raycast(ray, out hitObject))
+
+            if (hitObject.transform.gameObject != null) //&& !hitObject.transform.GetComponentInParent<RobotCommands>() can add later
             {
-                if (hitObject.transform.gameObject != null && hitObject.transform.name != "X" && hitObject.transform.name != "Y" && hitObject.transform.name != "Z" && !hitObject.transform.GetComponentInParent<RobotCommands>())
+                if (hitObject.transform.tag != "Ground")
                 {
-                    if (hitObject.transform.tag != "Ground")
-                    {
-                        holder.SetActive(true);
-                        target = hitObject.transform;
+                    ParentContainer.SetActive(true);
+                    _targetObject = hitObject.transform;
 
-                        transform.position = target.position;
-                       
-                    }
-                    else
-                    {
-                        holder.SetActive(false); //if it touches the ground
-                        target = null;
-                    }
-
+                    transform.position = _targetObject.position;
                 }
-
-                if (hitObject.transform.GetComponentInParent<RobotCommands>())
+                else
                 {
-                    holder.SetActive(false);
-                    target = null;
+                    ParentContainer.SetActive(false); //if it touches the ground
+                    _targetObject = null;
                 }
 
             }
-            else
-            {
-                holder.SetActive(false);
-            }
 
-            if (Input.GetMouseButtonDown(1))
-            {
-                target = null;
-            }
+            //if (hitObject.transform.GetComponentInParent<RobotCommands>())
+            //{
+            //    ParentContainer.SetActive(false);
+            //    TargetObject = null;
+            //}
 
         }
+        else
+        {
+            ParentContainer.SetActive(false);
+        }
 
-        
+        if (Input.GetMouseButtonDown(1))
+        {
+            _targetObject = null;
+        }
 
+        return _targetObject;
 
     }
 
     //yes
     void MoveTool()
     {
-        if (xAxis)
+        if (_xAxis)
         {
-
+            print(_mainValues);
             Vector3 mousePosition = GetMousePositionX(); //get the mouse position
 
-            if (!distanceChecked) //set the difference between the mouse and the origin point
-            {
-                distanceChecked = true;
-                distance = mousePosition - transform.position;
-            }
-            if (moveActive)
-                transform.position = new Vector3(mousePosition.x - distance.x, transform.position.y, transform.position.z); //apply the movement
-            else if (rotActive)
-                transform.eulerAngles = new Vector3(mousePosition.x - distance.x, transform.position.y, transform.position.z);
+            DistanceCheck(mousePosition);
+
+            Value = new Vector3(mousePosition.x - _distance.x, _mainValues.y, _mainValues.z);
+            print(_mainValues);
+            //if (_moveActive)
+            //    transform.position = new Vector3(mousePosition.x - _distance.x, transform.position.y, transform.position.z); //apply the movement
+            //else if (_rotActive)
+            //    transform.eulerAngles = new Vector3(mousePosition.x - _distance.x, transform.position.y, transform.position.z);
         }
 
-        if (yAxis)
+        if (_yAxis)
         {
 
 
             Vector3 mousePosition = GetMousePositionY(); //get the mouse position
 
-            if (!distanceChecked) //set the difference between the mouse and the origin point
-            {
-                distanceChecked = true;
-                distance = mousePosition - transform.position;
-            }
-            if (moveActive)
-                transform.position = new Vector3(transform.position.x, mousePosition.y - distance.y, transform.position.z); //apply the movement
-            else if (rotActive)
-                transform.eulerAngles = new Vector3(transform.position.x, mousePosition.y - distance.y, transform.position.z);
+            DistanceCheck(mousePosition);
+
+            //if (_moveActive)
+            //    transform.position = new Vector3(transform.position.x, mousePosition.y - _distance.y, transform.position.z); //apply the movement
+            //else if (_rotActive)
+            //    transform.eulerAngles = new Vector3(transform.position.x, mousePosition.y - _distance.y, transform.position.z);
 
         }
 
-        if (zAxis)
+        if (_zAxis)
         {
-
 
             Vector3 mousePosition = GetMousePositionZ(); //get the mouse position
 
-            if (!distanceChecked) //set the difference between the mouse and the origin point
-            {
-                distanceChecked = true;
-                distance = mousePosition - transform.position;
-            }
-            if (moveActive)
-                transform.position = new Vector3(transform.position.x, transform.position.y, mousePosition.z - distance.z); //apply the movement
-            else if (rotActive)
-                transform.eulerAngles = new Vector3(transform.position.x, transform.position.y, mousePosition.z - distance.z);
+            DistanceCheck(mousePosition);
+
+            //if (_moveActive)
+            //    transform.position = new Vector3(transform.position.x, transform.position.y, mousePosition.z - _distance.z); //apply the movement
+            //else if (_rotActive)
+            //    transform.eulerAngles = new Vector3(transform.position.x, transform.position.y, mousePosition.z - _distance.z);
 
         }
        
-        if (target != null)
+        if (_targetObject != null)
         {
-            if (moveActive)
-                target.position = transform.position;
-            else if (rotActive)
-                target.eulerAngles = transform.eulerAngles;
+            if (_moveActive)
+                _targetObject.position = transform.position;
+            else if (_rotActive)
+                _targetObject.eulerAngles = transform.eulerAngles;
         }
-            
-
-      
 
     }
-
 
    
     #region mousePosition
@@ -222,40 +199,20 @@ public class BAZA_2 : MonoBehaviour
 
     Vector3 GetMousePositionX()
     {
-        ////Use of planes to determain the position of the mouse relative to the axis we are using
-        //Plane planeY = new Plane(Vector3.up, transform.position);
-        //Plane planeZ = new Plane(Vector3.forward, transform.position);
-
-        //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        ////for more effective results we use two planes that cover the parts that it needs to calculate for that axis 
-
-        //float distanceToPlane;
-
-        //if (planeY.Raycast(ray,out distanceToPlane))
-        //    pos = ray.GetPoint(distanceToPlane);
-
-        Plane planeX;
-
-        _camAngle = transform.position - Camera.main.transform.position;
-
-        _zAngle = Vector3.Angle(_camAngle, graphic[2].transform.forward);
-
-
-        if (_zAngle >= MaxAngle) //POD ODREĐENIM KUTEM KORISTI Z ILI Y OS
-        {
-            planeX = new Plane(Vector3.forward, transform.position);
-        }
-        else
-        {
-            planeX = new Plane(Vector3.up, transform.position);
-        }
+        //Use of planes to determain the position of the mouse relative to the axis we are using
+        Plane planeY = new Plane(Vector3.up, transform.position);
+        Plane planeZ = new Plane(Vector3.forward, transform.position);
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
+        //for more effective results we use two planes that cover the parts that it needs to calculate for that axis 
+
         float distanceToPlane;
 
-        if (planeX.Raycast(ray, out distanceToPlane))
+        if (planeY.Raycast(ray, out distanceToPlane))
+            pos = ray.GetPoint(distanceToPlane);
+
+        if (planeZ.Raycast(ray, out distanceToPlane))
             pos = ray.GetPoint(distanceToPlane);
 
         return pos;
@@ -303,4 +260,52 @@ public class BAZA_2 : MonoBehaviour
         return pos;
     }
     #endregion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    void DistanceCheck(Vector3 mousePosition)
+    {
+        if (!_distanceChecked) //set the difference between the mouse and the origin point
+        {
+            _distanceChecked = true;
+            _distance = mousePosition - MainTransform.position;
+        }
+    }
 }
